@@ -41,8 +41,9 @@ dmesg | head
 ---
 
 ## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+hasil percobaan 
+<img width="1184" height="665" alt="bachtiar" src="https://github.com/user-attachments/assets/8017a3a1-78e6-4b7f-b6df-46c072f1c7e5" />
+
 
 ---
 
