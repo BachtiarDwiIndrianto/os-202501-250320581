@@ -40,8 +40,10 @@ dmesg | head
 ---
 
 ## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+hasil percobaan
+<img width="1184" height="665" alt="naufaladib" src="https://github.com/user-attachments/assets/f07dfce5-76c1-48fa-9f19-ccb6352dfafd" />
+
+
 
 ---
 
