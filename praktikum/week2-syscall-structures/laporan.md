@@ -5,9 +5,9 @@ Topik: [Tuliskan judul topik, misalnya "Arsitektur Sistem Operasi dan Kernel"]
 ---
 
 ## Identitas
-- **Nama**  : [Nama Mahasiswa]  
-- **NIM**   : [NIM Mahasiswa]  
-- **Kelas** : [Kelas]
+- **Nama**  : [Bachtiar Dwi Indrianto]  
+- **NIM**   : [250320581]  
+- **Kelas** : [1DSRA]
 
 ---
 
@@ -71,7 +71,8 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
+- Apa bagian yang paling menantang minggu ini?
+  Tentu saja bagian codingan 
 - Bagaimana cara Anda mengatasinya?  
 
 ---
