@@ -44,8 +44,9 @@ dmesg | head
 ## Hasil Eksekusi
 Sertakan screenshot hasil percobaan atau diagram:
 ![Screenshot hasil](screenshots/example.png)
-
----
+<img width="1898" height="950" alt="Screenshot 2025-10-22 162516" src="https://github.com/user-attachments/assets/bb204a99-3f41-42ed-9e41-f77970280f55" />
+---<img width="1913" height="964" alt="Screenshot 2025-10-22 162353" src="https://github.com/user-attachments/assets/a37ffb18-ae8a-4fdf-a1ca-98711c66cfaa" />
+<img width="887" height="210" alt="Screenshot 2025-10-22 162425" src="https://github.com/user-attachments/assets/c97cd7a2-075c-4562-b6ca-c32dcf1a6e42" />
 
 ## Analisis
 - Jelaskan makna hasil percobaan.  
