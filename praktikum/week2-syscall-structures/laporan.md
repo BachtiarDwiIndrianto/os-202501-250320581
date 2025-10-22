@@ -61,21 +61,31 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 ---
 
 ## Quiz
-1. [Pertanyaan 1]  
-   **Jawaban:**  
-2. [Pertanyaan 2]  
-   **Jawaban:**  
-3. [Pertanyaan 3]  
-   **Jawaban:**  
+1. Apa fungsi utama system call dalam sistem operasi?  
+   **Jawaban:**
+   **Fungsi utama system call adalah sebagai penghubung antara program pengguna (user space) dengan kernel (system space) agar aplikasi dapat meminta layanan dari sistem operasi seperti membaca atau menulis file, mengalokasikan memori, membuat proses baru, atau berkomunikasi dengan perangkat keras. System call memungkinkan interaksi ini dilakukan dengan aman dan terkontrol tanpa memberi akses langsung kepada user terhadap sumber daya kernel.**
+     
+2. Sebutkan 4 kategori system call yang umum digunakan.  
+   **Jawaban:**
+   **Empat kategori utama system call yang umum digunakan dalam sistem operasi adalah:**
+**1.	Process Control – untuk membuat, menghentikan, dan mengatur proses (contoh: fork(), execve(), exit(), wait()).**
+**2.	File Management – untuk operasi file seperti membuka, membaca, menulis, atau menutup file (contoh: open(), read(), write(), close()).**
+**3.	Device Management – untuk mengontrol dan mengakses perangkat input/output (contoh: ioctl(), read(), write()).**
+**4.	Information Maintenance – untuk mendapatkan atau mengatur informasi sistem (contoh: getpid(), uname(), gettimeofday()).**
+
+3. Mengapa system call tidak bisa dipanggil langsung oleh user program? 
+   **Jawaban:**
+   **System call tidak dapat dipanggil langsung oleh program pengguna karena berjalan di tingkat kernel (privileged mode), sedangkan program biasa berjalan di user mode. Hal ini bertujuan untuk menjaga keamanan dan stabilitas sistem operasi, agar pengguna tidak bisa mengakses atau mengubah sumber daya kernel secara langsung yang dapat menyebabkan kerusakan sistem, kebocoran data, atau crash. Oleh karena itu, program hanya dapat memanggil system call melalui antarmuka API yang disediakan oleh sistem operasi (misalnya pustaka C glibc di Linux).**
+
 
 ---
 
 ## Refleksi Diri
 Tuliskan secara singkat:
 - Apa bagian yang paling menantang minggu ini?
-  Tentu saja bagian codingan 
+  Tentu pada saat di ubuntu pada saat percobaan karena masih awam dan sering salah kode.
 - Bagaimana cara Anda mengatasinya?  
-
+Saya belajar dengan teman yang sudah bisa dan bertanya ke AI.
 ---
 
 **Credit:**  
