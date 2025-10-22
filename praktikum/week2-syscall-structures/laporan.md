@@ -60,7 +60,7 @@ Sertakan screenshot hasil percobaan atau diagram:
 <img width="1898" height="950" alt="Screenshot 2025-10-22 162516" src="https://github.com/user-attachments/assets/bb204a99-3f41-42ed-9e41-f77970280f55" />
 ---<img width="1913" height="964" alt="Screenshot 2025-10-22 162353" src="https://github.com/user-attachments/assets/a37ffb18-ae8a-4fdf-a1ca-98711c66cfaa" />
 <img width="887" height="210" alt="Screenshot 2025-10-22 162425" src="https://github.com/user-attachments/assets/c97cd7a2-075c-4562-b6ca-c32dcf1a6e42" />
-
+<img width="1915" height="983" alt="Screenshot 2025-10-22 221240" src="https://github.com/user-attachments/assets/25bd1076-7f3c-471f-b1ab-3f649e970548" />
 ## Analisis
 - Jelaskan makna hasil percobaan.
  Makna hasil percobaan
