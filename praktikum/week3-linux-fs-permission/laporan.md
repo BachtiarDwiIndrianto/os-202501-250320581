@@ -61,8 +61,8 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 ---
 
 ## Quiz
-1. [Pertanyaan 1]  
-   **Jawaban:**  
+1. [Apa fungsi dari perintah chmod?]  
+   **Jawaban:**  chmod adalah perintah di Linux yang dipakai untuk mengatur izin akses file atau folder — siapa yang boleh melihat, mengubah, atau menjalankan file tersebut.
 2. [Pertanyaan 2]  
    **Jawaban:**  
 3. [Pertanyaan 3]  
