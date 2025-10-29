@@ -65,8 +65,9 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
    **Jawaban:**  chmod adalah perintah di Linux yang dipakai untuk mengatur izin akses file atau folder — siapa yang boleh melihat, mengubah, atau menjalankan file tersebut.
 2. [Pertanyaan 2]  
    **Jawaban:**  
-3. [Pertanyaan 3]  
-   **Jawaban:**  
+3. [Jelaskan perbedaan antara chown dan chmod?]  
+   **Jawaban:**  chmod	Mengatur izin akses file atau folder (siapa yang boleh baca, ubah, jalankan)
+chown	Mengubah kepemilikan file atau folder (siapa pemiliknya dan grupnya)
 
 ---
 
