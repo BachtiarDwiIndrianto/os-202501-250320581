@@ -67,8 +67,30 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 ## Quiz
 1. [Apa fungsi dari perintah chmod?]  
    **Jawaban:**  chmod adalah perintah di Linux yang dipakai untuk mengatur izin akses file atau folder — siapa yang boleh melihat, mengubah, atau menjalankan file tersebut.
-2. [Pertanyaan 2]  
-   **Jawaban:**  
+2. [Apa arti dari kode permission rwxr-xr--?]  
+   **Jawaban:**  # 🔐 Arti Kode Permission: `rwxr-xr--`
+
+Kode ini menunjukkan izin (permission) pada file atau folder di Linux.
+
+## 🧩 Pembagian Kode
+| Bagian | Untuk Siapa | Kode | Arti |
+|:-------|:-------------|:------|:-------------------------------------------|
+| 1️⃣ | **User (Pemilik)** | `rwx` | Bisa **baca (r)**, **ubah (w)**, dan **jalankan (x)** |
+| 2️⃣ | **Group (Kelompok)** | `r-x` | Bisa **baca (r)** dan **jalankan (x)**, tapi **tidak bisa ubah (–)** |
+| 3️⃣ | **Others (Orang lain)** | `r--` | Hanya bisa **baca (r)** saja |
+
+---
+
+## 🧠 Kesimpulan
+- Pemilik: **bebas melakukan apa saja**
+- Grup: **hanya bisa baca & jalankan**
+- Orang lain: **hanya bisa baca**
+
+---
+
+## 💡 Nilai Angka (Oktal)
+`rwxr-xr--` = **754**
+
 3. [Jelaskan perbedaan antara chown dan chmod?]  
    **Jawaban:**  chmod	Mengatur izin akses file atau folder (siapa yang boleh baca, ubah, jalankan)
 chown	Mengubah kepemilikan file atau folder (siapa pemiliknya dan grupnya)
