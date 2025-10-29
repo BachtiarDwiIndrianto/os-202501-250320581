@@ -99,8 +99,8 @@ chown	Mengubah kepemilikan file atau folder (siapa pemiliknya dan grupnya)
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
+- Apa bagian yang paling menantang minggu ini?  Pada saat bagian peng operasian ubuntu/linuxnya
+- Bagaimana cara Anda mengatasinya?  belajar bersama teman teman
 
 ---
 
