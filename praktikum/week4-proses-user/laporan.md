@@ -21,7 +21,15 @@ Setelah menyelesaikan tugas ini, mahasiswa mampu:
 5.Menjelaskan kaitan antara manajemen user dan keamanan sistem.
 
 ## Dasar Teori
-Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
+1. **Proses di Linux**
+   Proses adalah program yang sedang berjalan. Setiap proses punya nomor sendiri (PID) dan diatur oleh sistem agar semua bisa jalan dengan lancar.
+
+2. **User dan Hak Akses**
+   Ada dua jenis user di Linux: user biasa dan user root.
+   User root punya hak penuh untuk mengatur sistem, sedangkan user biasa hanya bisa menjalankan program.
+
+3. **Systemd dan Kernel**
+   `systemd` adalah proses pertama yang aktif saat Linux dinyalakan, sedangkan **kernel** adalah inti sistem yang menghubungkan pengguna dengan perangkat keras.
 
 ---
 
@@ -79,6 +87,10 @@ Sertakan screenshot hasil percobaan atau diagram:
 
 ## Kesimpulan
 Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+1. Dari praktikum ini, saya jadi paham kalau **setiap kegiatan di Linux itu dijalankan lewat proses** dan setiap proses dikendalikan oleh user tertentu.
+2. Saya belajar cara **melihat, mengatur, dan menghentikan proses** dengan perintah seperti `ps`, `kill`, dan `killall`.
+3. Saya juga tahu kalau **user root** adalah pengguna utama yang punya hak penuh untuk mengatur sistem, dan **systemd/init** adalah proses pertama yang mengatur jalannya semua layanan di Linux.
+4. Secara keseluruhan, praktikum ini membuat saya lebih mengerti bagaimana **Linux bekerja dari dalam**, mulai dari proses dijalankan sampai sistem bisa digunakan dengan aman.
 
 ---
 
@@ -122,7 +134,7 @@ Akun ini dibuat supaya ada satu pengguna yang bisa **mengatur dan memperbaiki se
 ## Refleksi Diri
 Tuliskan secara singkat:
 - Apa bagian yang paling menantang minggu ini?
-  Pada saat pengoprasian linux
+ Bagian yang paling susah itu waktu cari dan matiin proses, karena harus teliti lihat PID-nya.
 - Bagaimana cara Anda mengatasinya?
   Coba coba terus menerus sambil berdiskusi bersama teman teman
 
