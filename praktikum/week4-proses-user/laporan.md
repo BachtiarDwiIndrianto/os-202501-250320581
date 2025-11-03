@@ -13,10 +13,12 @@ Topik: [Tuliskan judul topik, misalnya "Arsitektur Sistem Operasi dan Kernel"]
 
 ## Tujuan
 Tuliskan tujuan praktikum minggu ini.  
-Contoh:  
-> Mahasiswa mampu menjelaskan fungsi utama sistem operasi dan peran kernel serta system call.
-
----
+Setelah menyelesaikan tugas ini, mahasiswa mampu:  
+1.Menjelaskan konsep proses dan user dalam sistem operasi Linux. 
+2.Menampilkan daftar proses yang sedang berjalan dan statusnya. 
+3.Menggunakan perintah untuk membuat dan mengelola user. 
+4.Menghentikan atau mengontrol proses tertentu menggunakan PID. 
+5.Menjelaskan kaitan antara manajemen user dan keamanan sistem.
 
 ## Dasar Teori
 Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
@@ -61,8 +63,7 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 
 ## Quiz
 1. [Apa fungsi dari proses init atau systemd dalam sistem Linux?]  
-   # Fungsi `init` / `systemd` di Linux
-
+   Fungsi init dan systemd dalam linux
 - Menjalankan proses pertama setelah sistem dinyalakan  
 - Menyiapkan lingkungan sistem (mount disk, aktifkan jaringan, dll)  
 - Mengatur dan mengawasi semua proses dan layanan  
@@ -70,8 +71,19 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 - Mengelola proses shutdown dan reboot agar aman  
 - Menjadi induk dari semua proses di sistem
 
-2. [Pertanyaan 2]  
-   **Jawaban:**  
+2. [Apa perbedaan antara kill dan killall?]  
+Perbedaan `kill` dan `killall`
+
+- **`kill`** → menghentikan **satu proses** berdasarkan **PID (nomor proses)**  
+ Contoh: `kill 1234`
+
+- **`killall`** → menghentikan **semua proses** dengan **nama yang sama**  
+ Contoh: `killall firefox`
+
+**Intinya:**  
+`kill` = pakai nomor proses  
+`killall` = pakai nama program
+
 3. [Pertanyaan 3]  
    **Jawaban:**  
 
@@ -79,8 +91,10 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
+- Apa bagian yang paling menantang minggu ini?
+  Pada saat pengoprasian linux
+- Bagaimana cara Anda mengatasinya?
+  Coba coba terus menerus sambil berdiskusi bersama teman teman
 
 ---
 
