@@ -5,9 +5,9 @@ Topik: [Tuliskan judul topik, misalnya "Arsitektur Sistem Operasi dan Kernel"]
 ---
 
 ## Identitas
-- **Nama**  : [Nama Mahasiswa]  
-- **NIM**   : [NIM Mahasiswa]  
-- **Kelas** : [Kelas]
+- **Nama**  : [Bachtiar Dwi Indrianto]  
+- **NIM**   : [250320581]  
+- **Kelas** : [1DSRA]
 
 ---
 
@@ -84,8 +84,17 @@ Perbedaan `kill` dan `killall`
 `kill` = pakai nomor proses  
 `killall` = pakai nama program
 
-3. [Pertanyaan 3]  
-   **Jawaban:**  
+3. [Mengapa user root memiliki hak istimewa di sistem Linux?]  
+User **root** di Linux itu seperti **bos besar** dari sistem.  
+Dia punya **hak penuh** untuk melakukan apa saja, misalnya:
+- Mengedit atau menghapus file apa pun  
+- Menambah atau menghapus pengguna  
+- Menginstal atau menghapus program  
+- Mengubah pengaturan sistem
+Akun ini dibuat supaya ada satu pengguna yang bisa **mengatur dan memperbaiki seluruh sistem** tanpa batasan.
+
+`root` adalah pengguna tertinggi yang **mengontrol semua hal di Linux.**
+
 
 ---
 
