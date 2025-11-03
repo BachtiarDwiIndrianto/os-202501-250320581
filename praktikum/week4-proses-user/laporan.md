@@ -60,8 +60,16 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 ---
 
 ## Quiz
-1. [Pertanyaan 1]  
-   **Jawaban:**  
+1. [Apa fungsi dari proses init atau systemd dalam sistem Linux?]  
+   # Fungsi `init` / `systemd` di Linux
+
+- Menjalankan proses pertama setelah sistem dinyalakan  
+- Menyiapkan lingkungan sistem (mount disk, aktifkan jaringan, dll)  
+- Mengatur dan mengawasi semua proses dan layanan  
+- Menentukan mode kerja sistem (teks, GUI, atau pemeliharaan)  
+- Mengelola proses shutdown dan reboot agar aman  
+- Menjadi induk dari semua proses di sistem
+
 2. [Pertanyaan 2]  
    **Jawaban:**  
 3. [Pertanyaan 3]  
