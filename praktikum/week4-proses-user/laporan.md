@@ -66,6 +66,7 @@ Sertakan screenshot hasil percobaan atau diagram:
 
 
 
+<img width="954" height="592" alt="Screenshot 2025-11-03 235937" src="https://github.com/user-attachments/assets/153def59-3a4f-4156-8ccf-8e0901b228ca" />
 
 
 
