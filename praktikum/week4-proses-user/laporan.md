@@ -45,9 +45,29 @@ dmesg | head
 
 ## Hasil Eksekusi
 Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+<img width="935" height="601" alt="Screenshot 2025-11-03 214842" src="https://github.com/user-attachments/assets/b17fdccd-914f-4305-9426-32e86960112e" />
+<img width="1919" height="1077" alt="Screenshot 2025-11-03 215054" src="https://github.com/user-attachments/assets/98b86f5d-3e72-4511-93d2-36181881acbe" />
+ Penjelasan Kolom Penting di Linux
 
----
+- **PID** → Nomor unik buat setiap proses yang sedang jalan.  
+  (Ibarat nomor identitas tiap program.)
+
+- **USER** → Nama orang (user) yang menjalankan proses itu.  
+  Misalnya `root`, `ubuntu`, atau nama akun kamu sendiri.
+
+- **%CPU** → Menunjukkan seberapa banyak CPU yang dipakai proses itu.  
+  Kalau angkanya tinggi, berarti prosesnya lagi berat kerja.
+
+- **%MEM** → Menunjukkan seberapa banyak RAM yang dipakai.  
+  Kalau tinggi, proses itu makan banyak memori.
+
+- **COMMAND** → Nama program atau perintah yang lagi dijalankan.  
+  Misalnya `firefox`, `bash`, `code`, dan lainnya.
+
+
+
+
+
 
 ## Analisis
 - Jelaskan makna hasil percobaan.  
