@@ -60,8 +60,20 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 ---
 
 ## Quiz
-1. [Pertanyaan 1]  
-   **Jawaban:**  
+1. [Apa perbedaan utama antara FCFS dan SJF?]  
+#  Perbandingan FCFS vs SJF
+
+| Aspek | FCFS (First Come First Serve) | SJF (Shortest Job First) |
+|-------|-------------------------------|--------------------------|
+|  Urutan | Siapa datang duluan, dikerjakan duluan | Yang paling cepat selesai, dikerjakan duluan |
+|  Waktu Tunggu | Bisa lama kalau proses awal panjang | Lebih cepat secara rata-rata |
+|  Efisiensi | Kurang efisien | Lebih efisien |
+|  Jenis | Non-preemptive | Bisa preemptive atau non-preemptive |
+|  Contoh | Antre kasir: datang duluan dilayani duluan | Kasir pilih pelanggan dengan barang paling sedikit dulu |
+---
+- **FCFS**: Sederhana tapi bisa bikin nunggu lama.  
+- **SJF**: Lebih cepat tapi butuh tahu lama tiap proses.
+  
 2. [Pertanyaan 2]  
    **Jawaban:**  
 3. [Pertanyaan 3]  
