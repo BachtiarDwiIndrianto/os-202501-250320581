@@ -128,11 +128,8 @@ Sertakan screenshot hasil percobaan atau diagram:
 - **COMMAND** → Nama program atau perintah yang lagi dijalankan.  
   Misalnya `firefox`, `bash`, `code`, dan lainnya.
 
-
-
+<img width="954" height="203" alt="Screenshot 2025-11-04 222936" src="https://github.com/user-attachments/assets/f15941dd-5c07-4485-ab38-9f71f727f23d" />
 <img width="954" height="592" alt="Screenshot 2025-11-03 235937" src="https://github.com/user-attachments/assets/153def59-3a4f-4156-8ccf-8e0901b228ca" />
-
-
 
 ## Analisis
 - Jelaskan makna hasil percobaan.  
