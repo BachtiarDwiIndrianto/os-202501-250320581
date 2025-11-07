@@ -127,8 +127,6 @@ Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
    - FCFS: ██████████████   (14.75)
    - SJF:  ████████████     (12.25)
 
-## Kesimpulan
-
 | Metric | FCFS | SJF | Pemenang |
 |--------|------|-----|-----------|
 | **Avg Waiting Time** | 8.75 | 4.5 | **SJF**  |
@@ -141,8 +139,24 @@ Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
 
 *SJF terbukti lebih efisien dalam penjadwalan CPU untuk workload ini*
 
----
+# Jelaskan kondisi kapan SJF lebih unggul dari FCFS dan sebaliknya.
 
+
+Kapan **SJF (Shortest Job First)** Lebih Unggul
+SJF lebih bagus dipakai kalau:
+- Proses yang dijalankan kebanyakan **berdurasi pendek**, jadi sistem bisa nyelesain banyak tugas kecil lebih cepat.  
+- **Waktu proses sudah diketahui**, jadi bisa milih mana yang paling cepat dulu.  
+- Tujuan sistemnya buat **menghemat waktu tunggu** dan ningkatin efisiensi.
+
+Kapan **FCFS (First Come First Served)** Lebih Unggul
+FCFS lebih cocok kalau:
+- Sistemnya **interaktif**, misalnya komputer dipakai banyak orang — siapa duluan datang, dia duluan dilayani.  
+- **Waktu prosesnya nggak bisa diprediksi**, jadi lebih aman pakai urutan datang.  
+- Sistem pengen **lebih adil**, bukan sekadar cepat.
+  
+#  Tambahkan kesimpulan singkat di akhir laporan.
+
+**SJF unggul dalam hal efisiensi waktu** dengan waiting time lebih rendah, sementara **FCFS lebih unggul dalam menjamin keadilan** antrean proses. Pemilihan algoritma terbaik bergantung pada prioritas sistem: kecepatan atau keadilan.
 ## Kesimpulan
 Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 
