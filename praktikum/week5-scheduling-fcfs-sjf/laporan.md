@@ -98,9 +98,11 @@ Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
 ---
 
 ## Analisis
-# Perbandingan Algoritma FCFS vs SJF
-
-## Hasil Analisis
+# Bandingkan hasil rata-rata WT dan TAT antara FCFS & SJF.
+| Algoritma | Avg Waiting Time | Avg Turnaround Time | Kelebihan | Kekurangan |
+     |------------|------------------|----------------------|------------|-------------|
+     | FCFS | 8,75 | 14,75 | Sederhana dan mudah diterapkan | Tidak efisien untuk proses panjang |
+     | SJF | 6,25 | 12,25 | Optimal untuk job pendek | Menyebabkan *starvation* pada job panjang |
 
 ### Data FCFS (First-Come First-Served)
 | Process | Burst Time | Arrival Time | Waiting Time | Turnaround Time |
