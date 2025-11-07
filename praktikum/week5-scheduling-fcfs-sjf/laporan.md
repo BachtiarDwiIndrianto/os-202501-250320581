@@ -92,15 +92,54 @@ Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
 ---
 
 ## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+
+<img width="1919" height="1079" alt="Screenshot 2025-11-07 133219" src="https://github.com/user-attachments/assets/a933940d-aa5f-43d2-afac-5cb8566e9b3f" />
 
 ---
 
 ## Analisis
-- Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
+# Perbandingan Algoritma FCFS vs SJF
+
+## Hasil Analisis
+
+### Data FCFS (First-Come First-Served)
+| Process | Burst Time | Arrival Time | Waiting Time | Turnaround Time |
+|---------|------------|--------------|--------------|-----------------|
+| P1      | 6          | 0            | 0            | 6               |
+| P2      | 8          | 1            | 5            | 13              |
+| P3      | 7          | 2            | 12           | 19              |
+| P4      | 3          | 3            | 18           | 21              |
+
+### Data SJF (Shortest Job First)
+| Process | Burst Time | Arrival Time | Waiting Time | Turnaround Time |
+|---------|------------|--------------|--------------|-----------------|
+| P1      | 6          | 0            | 0            | 6               |
+| P2      | 3          | 6            | 3            | 9               |
+| P3      | 7          | 9            | 7            | 16              |
+| P4      | 8          | 16           | 8            | 24              |
+
+## Perbandingan Performa
+- Waiting Time:
+   - FCFS: █████████ (8.75)
+   - SJF:  ██████    (6.25)
+
+- Turnaround Time:
+   - FCFS: ██████████████   (14.75)
+   - SJF:  ████████████     (12.25)
+
+## Kesimpulan
+
+| Metric | FCFS | SJF | Pemenang |
+|--------|------|-----|-----------|
+| **Avg Waiting Time** | 8.75 | 4.5 | **SJF**  |
+| **Avg Turnaround Time** | 14.75 | 13.75 | **SJF**  |
+
+**Kesimpulan Utama:** 
+-  **SJF lebih unggul** dalam kedua metrik performa
+-  **Penurunan Waiting Time**: 48.6% lebih baik
+-  **Penurunan Turnaround Time**: 6.8% lebih baik
+
+*SJF terbukti lebih efisien dalam penjadwalan CPU untuk workload ini*
 
 ---
 
