@@ -145,7 +145,6 @@ Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
 
 # Jelaskan kondisi kapan SJF lebih unggul dari FCFS dan sebaliknya.
 
-
 Kapan **SJF (Shortest Job First)** Lebih Unggul
 SJF lebih bagus dipakai kalau:
 - Proses yang dijalankan kebanyakan **berdurasi pendek**, jadi sistem bisa nyelesain banyak tugas kecil lebih cepat.  
@@ -158,7 +157,7 @@ FCFS lebih cocok kalau:
 - **Waktu prosesnya nggak bisa diprediksi**, jadi lebih aman pakai urutan datang.  
 - Sistem pengen **lebih adil**, bukan sekadar cepat.
   
-#  Tambahkan kesimpulan singkat di akhir laporan.
+# Tambahkan kesimpulan singkat di akhir laporan.
 
 **SJF unggul dalam hal efisiensi waktu** dengan waiting time lebih rendah, sementara **FCFS lebih unggul dalam menjamin keadilan** antrean proses. Pemilihan algoritma terbaik bergantung pada prioritas sistem: kecepatan atau keadilan.
 ## Kesimpulan
