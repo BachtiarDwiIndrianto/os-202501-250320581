@@ -92,9 +92,11 @@ Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
 ---
 
 ## Hasil Eksekusi
-
+PERCOBAAN 1
 <img width="1919" height="1079" alt="Screenshot 2025-11-07 133219" src="https://github.com/user-attachments/assets/a933940d-aa5f-43d2-afac-5cb8566e9b3f" />
+PERCOBAAN 2
 
+<img width="1917" height="1079" alt="Screenshot 2025-11-07 152346" src="https://github.com/user-attachments/assets/a171c0ad-5222-4c75-b0d9-cf4bccce269a" />
 ---
 
 ## Analisis
