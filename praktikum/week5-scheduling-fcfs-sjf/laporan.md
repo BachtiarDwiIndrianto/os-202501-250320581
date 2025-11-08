@@ -1,7 +1,6 @@
 
 # Laporan Praktikum Minggu [X]
-Topik: [Tuliskan judul topik, misalnya "Arsitektur Sistem Operasi dan Kernel"]
-
+Topik: Penjadwalan CPU – FCFS dan SJF
 ---
 
 ## Identitas
@@ -22,8 +21,19 @@ Tuliskan tujuan praktikum minggu ini.
 ---
 
 ## Dasar Teori
-Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
 
+1. **CPU Scheduling** adalah cara sistem operasi membagi waktu kerja prosesor agar semua proses bisa jalan dengan efisien. Karena CPU cuma bisa ngerjain satu proses dalam satu waktu, maka OS harus milih proses mana yang dijalankan duluan.
+
+2. **FCFS (First Come First Served)** artinya siapa datang duluan, dia yang dijalankan duluan — kayak antre di kasir. Algoritma ini sederhana, tapi kalau proses pertama panjang banget, yang lain harus nunggu lama (efeknya disebut *convoy effect*).
+
+3. **SJF (Shortest Job First)** milih proses dengan waktu eksekusi paling pendek buat dijalankan dulu. Tujuannya supaya proses cepat bisa segera selesai, dan rata-rata waktu tunggu jadi lebih kecil. Tapi kelemahannya, proses panjang bisa terus ketunda (terjadi *starvation*).
+
+4. Dua ukuran penting dalam penjadwalan adalah:
+
+   * **Waiting Time (WT)**: waktu yang dihabiskan proses untuk menunggu giliran dijalankan.
+   * **Turnaround Time (TAT)**: total waktu dari proses datang sampai selesai dikerjakan.
+
+5. Secara umum, **SJF lebih efisien daripada FCFS** dalam hal waktu tunggu dan waktu penyelesaian, tapi **FCFS lebih adil** karena semua proses dilayani berdasarkan urutan datangnya, bukan durasinya.
 ---
 
 ## Langkah Praktikum
@@ -162,8 +172,11 @@ FCFS lebih cocok kalau:
 # Tambahkan kesimpulan singkat di akhir laporan.
 
 **SJF unggul dalam hal efisiensi waktu** dengan waiting time lebih rendah, sementara **FCFS lebih unggul dalam menjamin keadilan** antrean proses. Pemilihan algoritma terbaik bergantung pada prioritas sistem: kecepatan atau keadilan.
+
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+1. Algoritma **SJF (Shortest Job First)** lebih efisien dibanding **FCFS (First Come First Served)** karena waktu tunggu dan waktu penyelesaiannya lebih kecil.
+2. **FCFS** lebih adil karena proses dijalankan sesuai urutan kedatangan, tapi bisa bikin proses lain nunggu lama kalau yang pertama butuh waktu lama.
+3. **SJF** cocok dipakai kalau durasi tiap proses sudah diketahui dan kebanyakan prosesnya pendek, sedangkan **FCFS** lebih pas buat sistem yang ingin sederhana dan adil.
 
 ---
 
@@ -208,9 +221,8 @@ SJF memang cepat dan efisien, tapi **nggak cocok untuk sistem interaktif** karen
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
-
+- Apa bagian yang paling menantang minggu ini?  ngitung waktu tunggu dan waktu selesai proses di algoritma FCFS dan SJF. Awalnya bingung karena urutan prosesnya beda-beda.
+- Bagaimana cara Anda mengatasinya?  Aku akhirnya bikin tabel dan Gantt Chart sendiri supaya lebih gampang lihat urutannya. Dari situ jadi lebih paham gimana cara kerja kedua algoritma itu.Dari praktikum ini aku belajar kalau cara sistem ngatur urutan proses itu penting banget, karena bisa bikin kerja CPU jadi lebih cepat atau malah lambat kalau salah pilih algoritma.
 ---
 
 **Credit:**  
