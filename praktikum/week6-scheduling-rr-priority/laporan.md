@@ -1,21 +1,24 @@
 
 # Laporan Praktikum Minggu [X]
-Topik: [Tuliskan judul topik, misalnya "Arsitektur Sistem Operasi dan Kernel"]
+Topik: [Penjadwalan CPU – Round Robin (RR) dan Priority Scheduling"]
 
 ---
 
 ## Identitas
-- **Nama**  : [Nama Mahasiswa]  
-- **NIM**   : [NIM Mahasiswa]  
-- **Kelas** : [Kelas]
+- **Nama**  : [Bachtiar Dwi Indrianto]  
+- **NIM**   : [250320581]  
+- **Kelas** : [1DSRA]
 
 ---
 
 ## Tujuan
 Tuliskan tujuan praktikum minggu ini.  
 Contoh:  
-> Mahasiswa mampu menjelaskan fungsi utama sistem operasi dan peran kernel serta system call.
-
+> Menghitung waiting time dan turnaround time pada algoritma RR dan Priority.
+Menyusun tabel hasil perhitungan dengan benar dan sistematis.
+Membandingkan performa algoritma RR dan Priority.
+Menjelaskan pengaruh time quantum dan prioritas terhadap keadilan eksekusi proses.
+Menarik kesimpulan mengenai efisiensi dan keadilan kedua algoritma.
 ---
 
 ## Dasar Teori
@@ -60,12 +63,34 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 ---
 
 ## Quiz
-1. [Pertanyaan 1]  
-   **Jawaban:**  
-2. [Pertanyaan 2]  
-   **Jawaban:**  
-3. [Pertanyaan 3]  
-   **Jawaban:**  
+1. [Apa perbedaan utama antara Round Robin dan Priority Scheduling?]  
+    Perbedaan Round Robin (RR) vs Priority Scheduling (PS)
+
+| Aspek | **Round Robin (RR)** | **Priority Scheduling (PS)** |
+|-------|----------------------|------------------------------|
+| **Dasar Penjadwalan** | Berdasarkan **waktu** (time quantum) | Berdasarkan **prioritas** proses |
+| **Cara Kerja** | Setiap proses mendapat jatah waktu yang sama secara bergantian (rotasi) | Proses dengan prioritas **lebih tinggi** dieksekusi lebih dulu |
+| **Keadilan (Fairness)** | Adil, karena semua proses mendapat waktu eksekusi yang sama | Kurang adil, proses prioritas rendah bisa tertunda lama |
+| **Cocok Untuk** | Sistem **time-sharing** (multitasking OS modern) | Sistem **real-time** atau tugas penting dengan prioritas tinggi |
+| **Kelemahan Utama** | **Overhead** tinggi karena sering terjadi context switching | **Starvation**, proses prioritas rendah bisa tidak dieksekusi lama |
+
+---
+
+2. [Apa pengaruh besar/kecilnya time quantum terhadap performa sistem?]  
+   Pengaruh Time Quantum terhadap Performa Sistem
+- **Kalau time quantum terlalu kecil:**  
+  CPU sering ganti-ganti proses. Akibatnya banyak waktu terbuang untuk pindah tugas, jadi sistem jadi **lambat dan boros waktu**.
+- **Kalau time quantum terlalu besar:**  
+  Satu proses bisa jalan terlalu lama. Proses lain jadi **nunggu lama**, sistem terasa **kurang responsif**.
+- **Kalau time quantum pas:**  
+  Semua proses dapat giliran dengan lancar. Sistem jadi **lebih seimbang**, **efisien**, dan **responsif**.
+
+Waktu quantum harus dipilih **tidak terlalu kecil dan tidak terlalu besar** supaya sistem berjalan **lancar dan adil** untuk semua proses.
+
+3. [Mengapa algoritma Priority dapat menyebabkan starvation?]
+    Dalam algoritma **Priority Scheduling**, proses yang punya **prioritas lebih tinggi** akan dijalankan dulu.
+Nah, kalau terus-menerus ada proses baru dengan prioritas tinggi yang datang,  maka proses yang **prioritasnya rendah** akan terus **menunggu** dan **tidak pernah dijalankan**.Itulah yang disebut **starvation** — proses "kelaparan" karena **tidak kebagian waktu CPU**.
+
 
 ---
 
