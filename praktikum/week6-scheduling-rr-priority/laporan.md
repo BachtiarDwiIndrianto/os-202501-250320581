@@ -22,8 +22,19 @@ Menarik kesimpulan mengenai efisiensi dan keadilan kedua algoritma.
 ---
 
 ## Dasar Teori
-Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
 
+1. **CPU Scheduling** adalah proses sistem operasi dalam menentukan urutan eksekusi proses agar CPU digunakan secara efisien dan adil.
+
+2. **Round Robin (RR)** memberi waktu eksekusi sama rata (*time quantum*) untuk setiap proses. Jika waktu habis, proses akan diantrikan kembali. Cocok untuk sistem interaktif.
+
+3. **Priority Scheduling** mengeksekusi proses berdasarkan tingkat prioritas. Proses dengan prioritas tertinggi dijalankan lebih dulu.
+
+4. **Kelebihan & Kekurangan:**
+   - RR: adil, tapi bisa boros waktu jika *quantum* terlalu kecil.  
+   - Priority: efisien untuk proses penting, tapi bisa menyebabkan *starvation*.
+
+5. **Kesimpulan:**  
+   Round Robin menekankan keadilan waktu, sedangkan Priority Scheduling menekankan efisiensi sesuai tingkat kepentingan proses.
 ---
 
 ## Langkah Praktikum
@@ -58,8 +69,18 @@ Sertakan screenshot hasil percobaan atau diagram:
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+1. Algoritma **Round Robin (RR)** memberikan keadilan waktu eksekusi bagi setiap proses karena semua mendapat jatah *time quantum* yang sama.  
+   Namun, performanya sangat bergantung pada besar kecilnya nilai *quantum*.
 
+2. Algoritma **Priority Scheduling** lebih efisien untuk proses penting dengan prioritas tinggi, tetapi bisa menyebabkan **starvation** bagi proses dengan prioritas rendah.
+
+3. Nilai *time quantum* yang terlalu kecil membuat sistem sering melakukan **context switch**, sedangkan *quantum* yang terlalu besar membuat sistem kurang responsif.
+
+4. Hasil perhitungan menunjukkan bahwa **RR lebih adil**, sedangkan **Priority lebih efisien** bila prioritas diatur dengan baik.
+
+5. Secara keseluruhan, kedua algoritma memiliki kelebihan masing-masing dan pemilihannya harus disesuaikan dengan kebutuhan sistem:  
+   - RR → cocok untuk sistem interaktif.  
+   - Priority → cocok untuk sistem dengan tugas yang berbeda tingkat kepentingannya.
 ---
 
 ## Quiz
@@ -96,8 +117,11 @@ Nah, kalau terus-menerus ada proses baru dengan prioritas tinggi yang datang,  m
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
+- Apa bagian yang paling menantang minggu ini?
+  Kesulitan utama adalah memahami alur pergantian proses pada Round Robin serta cara menentukan urutan eksekusi pada Priority Scheduling.  
+Namun, setelah membuat Gantt Chart dan tabel perhitungan, konsepnya menjadi lebih mudah dipahami.
+- Bagaimana cara Anda mengatasinya?
+ Saya mencoba menghitung ulang secara manual, memeriksa contoh di referensi, dan mendiskusikannya dengan teman kelompok agar lebih paham alur eksekusi proses.
 
 ---
 
