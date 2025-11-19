@@ -14,11 +14,12 @@ Topik: [Penjadwalan CPU – Round Robin (RR) dan Priority Scheduling"]
 ## Tujuan
 Tuliskan tujuan praktikum minggu ini.  
 Contoh:  
-> Menghitung waiting time dan turnaround time pada algoritma RR dan Priority.
-Menyusun tabel hasil perhitungan dengan benar dan sistematis.
-Membandingkan performa algoritma RR dan Priority.
-Menjelaskan pengaruh time quantum dan prioritas terhadap keadilan eksekusi proses.
-Menarik kesimpulan mengenai efisiensi dan keadilan kedua algoritma.
+
+- Menghitung waiting time dan turnaround time pada algoritma RR dan Priority.
+-Menyusun tabel hasil perhitungan dengan benar dan sistematis.
+-Membandingkan performa algoritma RR dan Priority.
+-Menjelaskan pengaruh time quantum dan prioritas terhadap keadilan eksekusi proses.
+-Menarik kesimpulan mengenai efisiensi dan keadilan kedua algoritma.
 ---
 
 ## Dasar Teori
