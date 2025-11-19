@@ -56,10 +56,62 @@ dmesg | head
 ---
 
 ## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
 
----
+**ROUND ROBIN(RR)**
+
+<img width="1911" height="1079" alt="Screenshot 2025-11-19 193730" src="https://github.com/user-attachments/assets/9970cf6c-7d72-4db7-890a-ab0c931edf48" />
+Hitung Waiting dan Turnaround Time
+
+|    Proses   | Burst Time | Arrival Time | Finish | Waiting Time | Turnaround Time |
+| :---------: | :--------: | :----------: | :----: | :----------: | :-------------: |
+|      P1     |      5     |       0      |   14   |       9      |        14       |
+|      P2     |      3     |       1      |    6   |       2      |        5        |
+|      P3     |      8     |       2      |   22   |      12      |        20       |
+|      P4     |      6     |       3      |   20   |      11      |        17       |
+|  **Total**  |            |              |        |    **34**    |      **56**     |
+| **Average** |            |              |        |    **8,5**   |      **14**     |
+
+   
+Simulasikan eksekusi menggunakan Gantt Chart (manual atau spreadsheet).
+
+       | P1 | P2 | P3 | P4 | P1 | P3 | P4 | P3 |
+    0    3    6    9   12    14   17   20   22
+
+   Catat sisa burst time tiap putaran.
+   | Putaran           | P1 | P2 | P3 | P4 |
+| ----------------- | -- | -- | -- | -- |
+| Awal              | 5  | 3  | 8  | 6  |
+| Setelah Putaran 1 | 2  | 0  | 5  | 3  |
+| Setelah Putaran 2 | 0  | 0  | 2  | 0  |
+| Setelah Putaran 3 | 0  | 0  | 0  | 0  |
+
+**PRIORITY SCHEDULING**
+
+|    Proses   | Burst Time | Arrival Time | Priority | Start | Finish | Waiting Time | Turnaround Time |
+| :---------: | :--------: | :----------: | :------: | :---: | :----: | :----------: | :-------------: |
+|      P1     |      5     |       0      |     2    |   0   |    5   |       0      |        5        |
+|      P2     |      3     |       1      |     1    |   5   |    8   |       4      |        7        |
+|      P3     |      6     |       3      |     3    |   8   |   14   |       5      |        11       |
+|      P4     |      8     |       2      |     4    |   14  |   22   |      12      |        20       |
+|  **Total**  |            |              |          |       |        |    **21**    |      **43**     |
+| **Average** |            |              |          |       |        |   **5,25**   |    **10,75**    |
+
+ - Waitinng Time :
+       - P1 : 0 - 0 = 0
+       - P2 : 5 - 1 = 4
+       - P3 : 8 - 3 = 5
+       - P4 : 14 - 2 = 12
+   - Turnaround Time :
+       - P1 : 0 + 5 = 5
+       - P2 : 4 + 3 = 7
+       - P3 : 5 + 6 = 11
+       - P4 : 12 + 8 = 20
+    
+    | Algoritma | Avg Waiting Time | Avg Turnaround Time | Kelebihan | Kekurangan |
+     |------------|------------------|----------------------|------------|-------------|
+     | RR | 8,5 | 14 | Adil terhadap semua proses | Tidak efisien jika quantum tidak tepat |
+     | Priority | 5,25 | 10,75 | Efisien untuk proses penting | Potensi *starvation* pada prioritas rendah |
+
 
 ## Analisis
 - Jelaskan makna hasil percobaan.  
