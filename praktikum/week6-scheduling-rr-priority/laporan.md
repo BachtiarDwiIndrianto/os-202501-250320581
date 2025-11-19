@@ -46,12 +46,58 @@ Menarik kesimpulan mengenai efisiensi dan keadilan kedua algoritma.
 ---
 
 ## Kode / Perintah
-Tuliskan potongan kode atau perintah utama:
-```bash
-uname -a
-lsmod | head
-dmesg | head
-```
+1. **Siapkan Data Proses**
+   Gunakan contoh data berikut (boleh dimodifikasi sesuai kebutuhan):
+   | Proses | Burst Time | Arrival Time | Priority |
+   |:--:|:--:|:--:|:--:|
+   | P1 | 5 | 0 | 2 |
+   | P2 | 3 | 1 | 1 |
+   | P3 | 8 | 2 | 4 |
+   | P4 | 6 | 3 | 3 |
+
+2. **Eksperimen 1 – Round Robin (RR)**
+   - Gunakan *time quantum (q)* = 3.  
+   - Hitung *waiting time* dan *turnaround time* untuk tiap proses.  
+   - Simulasikan eksekusi menggunakan Gantt Chart (manual atau spreadsheet).  
+     ```
+     | P1 | P2 | P3 | P4 | P1 | P3 | ...
+     0    3    6    9   12   15   18  ...
+     ```
+   - Catat sisa *burst time* tiap putaran.
+
+3. **Eksperimen 2 – Priority Scheduling (Non-Preemptive)**
+   - Urutkan proses berdasarkan nilai prioritas (angka kecil = prioritas tinggi).  
+   - Lakukan perhitungan manual untuk:
+     ```
+     WT[i] = waktu mulai eksekusi - Arrival[i]
+     TAT[i] = WT[i] + Burst[i]
+     ```
+   - Buat tabel perbandingan hasil RR dan Priority.
+
+4. **Eksperimen 3 – Analisis Variasi Time Quantum (Opsional)**
+   - Ubah *quantum* menjadi 2 dan 5.  
+   - Amati perubahan nilai rata-rata *waiting time* dan *turnaround time*.  
+   - Buat tabel perbandingan efek *quantum*.
+
+5. **Eksperimen 4 – Dokumentasi**
+   - Simpan semua hasil tabel dan screenshot ke:
+     ```
+     praktikum/week6-scheduling-rr-priority/screenshots/
+     ```
+   - Buat tabel perbandingan seperti berikut:
+
+     | Algoritma | Avg Waiting Time | Avg Turnaround Time | Kelebihan | Kekurangan |
+     |------------|------------------|----------------------|------------|-------------|
+     | RR | ... | ... | Adil terhadap semua proses | Tidak efisien jika quantum tidak tepat |
+     | Priority | ... | ... | Efisien untuk proses penting | Potensi *starvation* pada prioritas rendah |
+
+6. **Commit & Push**
+   ```bash
+   git add .
+   git commit -m "Minggu 6 - CPU Scheduling RR & Priority"
+   git push origin main
+   ```
+
 
 ---
 
@@ -113,10 +159,53 @@ Simulasikan eksekusi menggunakan Gantt Chart (manual atau spreadsheet).
      | Priority | 5,25 | 10,75 | Efisien untuk proses penting | Potensi *starvation* pada prioritas rendah |
 
 
-## Analisis
-- Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
+<img width="1919" height="1079" alt="Screenshot 2025-11-19 202512" src="https://github.com/user-attachments/assets/f006d284-c549-45cc-907f-2d597a5e3b1c" />
+
+-Round Robin (RR0 - Time Quantum (q = 2)
+
+| Proses | Arrival | Burst | Finish | Turnaround (F − A) | Waiting |
+| ------ | ------: | ----: | -----: | -----------------: | ------: |
+| P1     |       0 |     5 |     14 |                 14 |       9 |
+| P2     |       1 |     3 |     11 |                 10 |       7 |
+| P3     |       2 |     8 |     22 |                 20 |      12 |
+| P4     |       3 |     6 |     20 |                 17 |      11 |
+
+
+|           Putaran | P1 | P2 | P3 | P4 |
+| ----------------: | -: | -: | -: | -: |
+|              Awal |  5 |  3 |  8 |  6 |
+| Setelah Putaran 1 |  1 |  1 |  6 |  4 |
+| Setelah Putaran 2 |  0 |  0 |  4 |  2 |
+| Setelah Putaran 3 |  0 |  0 |  0 |  0 |
+
+
+ 
+ 
+ - Round Robin (RR) – Time Quantum (q = 5)
+
+|    Proses   | Burst Time | Arrival Time | Finish (P1) | Finish (P2) | Finish (P3) | Finish (P4) | Waiting Time | Turnaround Time |
+| :---------: | :--------: | :----------: | :---------: | :---------: | :---------: | :---------: | :----------: | :-------------: |
+|      P1     |      5     |       0      |      5      |  (Selesai)  |  (Selesai)  |  (Selesai)  |       0      |        5        |
+|      P2     |      3     |       1      |      8      |  (Selesai)  |  (Selesai)  |  (Selesai)  |       4      |        7        |
+|      P3     |      8     |       2      |      13     |      18     |      22     |  (Selesai)  |      11      |        19       |
+|      P4     |      6     |       3      |      18     |      22     |  (Selesai)  |  (Selesai)  |      13      |        19       |
+|  **Total**  |            |              |             |             |             |             |    **28**    |      **50**     |
+| **Average** |            |              |             |             |             |             |     **7**    |     **12,5**    |
+
+
+**PERBANDINGAN EFEK QUANTUM**
+| Algoritma                     | Quantum   | Avg Waiting Time | Avg Turnaround Time | Catatan                                                       |
+| ----------------------------- | --------- | ---------------- | ------------------- | ------------------------------------------------------------- |
+| **Round Robin**               | **Q = 2** | **≈ 16.8**       | **≈ 23.8**          | Sangat sering bergantian, antrian panjang, waiting time besar |
+| **Round Robin**               | **Q = 3** | **≈ 14.6**       | **≈ 21.6**          | Pergantian lebih efisien, beban context switch berkurang      |
+| **Round Robin**               | **Q = 5** | **≈ 12.0**       | **≈ 19.0**          | Mendekati FCFS, context switch sedikit                        |
+| **Priority (Non-Preemptive)** | –         | **≈ 10.0**       | **≈ 17.0**          | Eksekusi lebih cepat untuk prioritas tinggi, rawan starvation |
+
+
+Pengaruh Quantum
+Q lebih kecil → pergantian sering → waiting time membesar.
+Q lebih besar → proses berjalan lebih lama per giliran → lebih efisien.
+Q=5 memberikan hasil paling baik di antara RR.
 
 ---
 
