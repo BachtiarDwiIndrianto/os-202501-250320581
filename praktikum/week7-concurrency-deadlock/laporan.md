@@ -23,8 +23,8 @@ Setelah menyelesaikan tugas ini, mahasiswa mampu:
 ---
 
 ## Dasar Teori
-Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
-
+Pada praktikum minggu ini, kami mempelajari mekanisme sinkronisasi proses dan penanganan deadlock dalam sistem operasi. Tujuan utamanya adalah memahami bagaimana beberapa proses dapat berjalan secara bersamaan (concurrent) tanpa menyebabkan konflik data atau kebuntuan sumber daya (deadlock).
+Kami melakukan studi kasus berbasis Dining Philosophers Problem, yaitu permasalahan klasik sinkronisasi yang menggambarkan bagaimana proses harus berbagi sumber daya terbatas (garpu/mutex/semaphore) tanpa menimbulkan deadlock
 ---
 
 ## Langkah Praktikum
@@ -47,9 +47,182 @@ dmesg | head
 
 ## Hasil Eksekusi
 Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+<img width="1919" height="1079" alt="Screenshot 2025-11-26 194111" src="https://github.com/user-attachments/assets/a11c5552-306e-471f-a235-fd6321661f9f" />
+<img width="1919" height="1078" alt="Screenshot 2025-11-26 194413" src="https://github.com/user-attachments/assets/cf2cde05-675f-4ebd-9990-35bcf85e561e" />
+<img width="1919" height="1079" alt="Screenshot 2025-11-26 194518" src="https://github.com/user-attachments/assets/83154c6e-a622-4bb4-a1d1-304b7d8a99ec" />
+<img width="1914" height="1076" alt="Screenshot 2025-11-26 194619" src="https://github.com/user-attachments/assets/97799517-b2ae-4067-88ce-b18f70cb87ce" />
 
 ---
+## Eksperimen 1
+
+Simulasi Dining Philosophers (Deadlock Version)
+```
+import threading
+import time
+import random
+
+# jumlah filsuf
+N = 5
+
+# setiap garpu = 1 lock
+forks = [threading.Lock() for _ in range(N)]
+
+def philosopher(i):
+    left = i
+    right = (i + 1) % N
+
+    while True:
+        print(f"Filsuf {i} sedang berpikir...")
+        time.sleep(random.uniform(0.5, 1.5))
+
+        print(f"Filsuf {i} mencoba mengambil garpu kiri {left}")
+        forks[left].acquire()
+        print(f"Filsuf {i} mengambil garpu kiri {left}")
+
+        print(f"Filsuf {i} mencoba mengambil garpu kanan {right}")
+        forks[right].acquire()  # <-- DI SINI DEADLOCK TERJADI
+        print(f"Filsuf {i} mengambil garpu kanan {right}")
+
+        print(f"Filsuf {i} sedang makan...")
+        time.sleep(random.uniform(0.5, 1.5))
+
+        forks[left].release()
+        forks[right].release()
+        print(f"Filsuf {i} selesai makan dan meletakkan garpu\n")
+
+# Membuat thread
+threads = []
+for i in range(N):
+    t = threading.Thread(target=philosopher, args=(i,))
+    threads.append(t)
+    t.start()
+```
+
+
+## Eksperimen 2
+Versi Fixed (Menggunakan Semaphore / Monitor)
+FIXED VERSION — Semaphore (Mutex Global)
+```
+import threading
+import time
+import random
+
+N = 5
+forks = [threading.Lock() for _ in range(N)]
+mutex = threading.Semaphore(1)  # mencegah deadlock
+
+def philosopher(i):
+    left = i
+    right = (i + 1) % N
+
+    while True:
+        print(f"Filsuf {i} sedang berpikir...")
+        time.sleep(random.uniform(0.2, 0.6))
+
+        mutex.acquire()  # hanya 1 filsuf yang boleh ambil garpu
+        forks[left].acquire()
+        forks[right].acquire()
+        mutex.release()
+
+        print(f"Filsuf {i} mulai makan...")
+        time.sleep(random.uniform(0.3, 0.7))
+
+        forks[left].release()
+        forks[right].release()
+        print(f"Filsuf {i} selesai makan.\n")
+
+threads = []
+for i in range(N):
+    t = threading.Thread(target=philosopher, args=(i,))
+    t.start()
+```
+
+FIXED VERSION Batasi Maksimal 4 Filsuf
+
+```
+import threading
+import time
+import random
+
+N = 5
+forks = [threading.Lock() for _ in range(N)]
+room = threading.Semaphore(4)   # hanya 4 boleh mencoba makan
+
+def philosopher(i):
+    left = i
+    right = (i + 1) % N
+
+    while True:
+        print(f"Filsuf {i} sedang berpikir...")
+        time.sleep(random.uniform(0.2, 0.6))
+
+        room.acquire()
+        forks[left].acquire()
+        forks[right].acquire()
+
+        print(f"Filsuf {i} makan...")
+        time.sleep(random.uniform(0.3, 0.7))
+
+        forks[left].release()
+        forks[right].release()
+        room.release()
+        print(f"Filsuf {i} selesai makan.\n")
+
+threads = []
+for i in range(N):
+    t = threading.Thread(target=philosopher, args=(i,))
+    t.start()
+```
+
+FIXED VERSION Odd–Even Fork Picking Rule
+
+```
+import threading
+import time
+import random
+
+N = 5
+forks = [threading.Lock() for _ in range(N)]
+
+def philosopher(i):
+    left = i
+    right = (i + 1) % N
+
+    # odd = right-first, even = left-first
+    first = left if i % 2 == 0 else right
+    second = right if i % 2 == 0 else left
+
+    while True:
+        print(f"Filsuf {i} sedang berpikir...")
+        time.sleep(random.uniform(0.2, 0.6))
+
+        forks[first].acquire()
+        forks[second].acquire()
+
+        print(f"Filsuf {i} makan (urutan garpu dibalik)...")
+        time.sleep(random.uniform(0.3, 0.7))
+
+        forks[first].release()
+        forks[second].release()
+        print(f"Filsuf {i} selesai makan.\n")
+
+threads = []
+for i in range(N):
+    t = threading.Thread(target=philosopher, args=(i,))
+    t.start()
+```
+
+## Eksperimen 3
+
+| **Kondisi Deadlock** | **Terjadi di Versi Deadlock?**                                 | **Solusi di Versi Fixed**                                                                                                                                                                                                                                 |
+| -------------------- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Mutual Exclusion** | Ya setiap garpu hanya bisa digunakan 1 filsuf                | Tetap ada (karena perlu), tetapi *akses garpu dikontrol* menggunakan **mutex atau semaphore** agar tidak menyebabkan hold-and-wait serentak                                                                                                               |
+| **Hold and Wait**    | Ya  semua filsuf memegang garpu kiri dan menunggu garpu kanan | **Semaphore(1)**: filsuf hanya boleh mengambil kedua garpu sekaligus (menghilangkan hold-and-wait) <br> **Max 4**: tidak semua filsuf bisa menahan garpu kiri <br> **Odd-Even**: menghindari menunggu dalam kondisi simetris                              |
+| **No Preemption**    | Ya  garpu tidak bisa direbut paksa                            | Tetap ada (karena garpu tidak bisa direbut), tetapi **deadlock hilang karena circular wait dihilangkan**                                                                                                                                                  |
+| **Circular Wait**    | Ya  P0 menunggu P1 → P1 menunggu P2 → … → P4 menunggu P0      | **Max 4 philosophers**: siklus tidak bisa terbentuk <br> **Odd-Even Rule**: urutan pengambilan garpu diubah sehingga tidak ada lingkaran menunggu <br> **Semaphore mutex**: hanya satu yang boleh mengambil garpu, sehingga siklus tidak pernah terbentuk |
+
+
+
 
 ## Analisis
 - Jelaskan makna hasil percobaan.  
@@ -114,8 +287,16 @@ Singkatnya: Sinkronisasi diperlukan untuk **keamanan data, keteraturan akses res
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
+- Apa bagian yang paling menantang minggu ini?
+Bagian paling menantang adalah memahami interaksi kompleks antara keempat kondisi deadlock dan menerapkan solusi yang tepat untuk Dining Philosophers Problem. Analisis mendalam tentang bagaimana setiap solusi mempengaruhi kondisi Coffman membutuhkan pemahaman konseptual yang kuat.
+- Bagaimana cara Anda mengatasinya?
+Studi Teori: Mempelajari ulang konsep dasar deadlock dan kondisi Coffman
+Simulasi Manual: Melakukan tracing eksekusi untuk setiap skenario
+Diskusi Kelompok: Berbagi pemahaman dan pendekatan solusi
+Eksperimen Berulang: Menjalankan kode multiple times untuk verifikasi
+Analisis Komparatif: Membuat tabel perbandingan antar solusi
+
+
 
 ---
 
