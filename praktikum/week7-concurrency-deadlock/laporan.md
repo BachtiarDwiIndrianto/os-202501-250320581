@@ -36,12 +36,56 @@ Kami melakukan studi kasus berbasis Dining Philosophers Problem, yaitu permasala
 ---
 
 ## Kode / Perintah
-Tuliskan potongan kode atau perintah utama:
-```bash
-uname -a
-lsmod | head
-dmesg | head
-```
+1. **Persiapan Tim**
+   - Bentuk kelompok beranggotakan 3–4 orang.  
+   - Tentukan ketua dan pembagian tugas (analisis, implementasi, dokumentasi).
+
+2. **Eksperimen 1 – Simulasi Dining Philosophers (Deadlock Version)**
+   - Implementasikan versi sederhana dari masalah *Dining Philosophers* tanpa mekanisme pencegahan deadlock.  
+   - Contoh pseudocode:
+     ```text
+     while true:
+       think()
+       pick_left_fork()
+       pick_right_fork()
+       eat()
+       put_left_fork()
+       put_right_fork()
+     ```
+   - Jalankan simulasi atau analisis alur (boleh menggunakan pseudocode atau diagram alur).  
+   - Identifikasi kapan dan mengapa deadlock terjadi.
+
+3. **Eksperimen 2 – Versi Fixed (Menggunakan Semaphore / Monitor)**
+   - Modifikasi pseudocode agar deadlock tidak terjadi, misalnya:
+     - Menggunakan *semaphore (mutex)* untuk mengontrol akses.
+     - Membatasi jumlah filosof yang dapat makan bersamaan (max 4).  
+     - Mengatur urutan pengambilan garpu (misal, filosof terakhir mengambil secara terbalik).  
+   - Analisis hasil modifikasi dan buktikan bahwa deadlock telah dihindari.
+
+4. **Eksperimen 3 – Analisis Deadlock**
+   - Jelaskan empat kondisi deadlock dari versi pertama dan bagaimana kondisi tersebut dipecahkan pada versi fixed.  
+   - Sajikan hasil analisis dalam tabel seperti contoh berikut:
+
+     | Kondisi Deadlock | Terjadi di Versi Deadlock | Solusi di Versi Fixed |
+     |------------------|---------------------------|------------------------|
+     | Mutual Exclusion | Ya (satu garpu hanya satu proses) | Gunakan semaphore untuk kontrol akses |
+     | Hold and Wait | Ya | Hindari proses menahan lebih dari satu sumber daya |
+     | No Preemption | Ya | Tidak ada mekanisme pelepasan paksa |
+     | Circular Wait | Ya | Ubah urutan pengambilan sumber daya |
+
+5. **Eksperimen 4 – Dokumentasi**
+   - Simpan semua diagram, screenshot simulasi, dan hasil diskusi di:
+     ```
+     praktikum/week7-concurrency-deadlock/screenshots/
+     ```
+   - Tuliskan laporan kelompok di `laporan.md` (format IMRaD singkat: *Pendahuluan, Metode, Hasil, Analisis, Diskusi*).
+
+6. **Commit & Push**
+   ```bash
+   git add .
+   git commit -m "Minggu 7 - Sinkronisasi Proses & Deadlock"
+   git push origin main
+   ```
 
 ---
 
@@ -225,11 +269,105 @@ for i in range(N):
 
 
 ## Analisis
+Berikut **Analisis Eksperimen 1 dan Eksperimen 2 BESERTA Kesimpulannya**, sudah ditulis rapi dan siap ditempel ke laporan kamu.
+
+---
+
+# **Analisis Eksperimen 1 dan Eksperimen 2**
+
+## **Analisis Eksperimen 1 – *Dining Philosophers Deadlock Version***
+
+Pada eksperimen pertama, setiap filsuf mengambil **garpu kiri terlebih dahulu**, kemudian mencoba mengambil **garpu kanan**. Pola ini terlihat sederhana, namun menciptakan kondisi yang sangat rentan terhadap *deadlock*.
+
+Dari hasil eksekusi terlihat bahwa:
+
+* Semua filsuf **berhasil mengambil garpu kiri secara bersamaan**.
+* Setelah itu, semua filsuf **mencoba mengambil garpu kanan**, tetapi garpu tersebut sedang digunakan oleh filsuf lain.
+* Akibatnya, **semua filsuf menunggu secara bersamaan**, tidak ada yang bisa melanjutkan, dan tidak ada garpu yang dilepas.
+* Kondisi ini menyebabkan **deadlock total**: tidak ada filsuf yang dapat makan maupun melanjutkan proses.
+
+Empat kondisi Coffman yang menyebabkan deadlock semuanya muncul pada eksperimen ini:
+
+1. **Mutual Exclusion** – Garpu hanya bisa digunakan oleh satu filsuf.
+2. **Hold and Wait** – Filsuf memegang garpu kiri sambil menunggu garpu kanan.
+3. **No Preemption** – Garpu tidak bisa direbut atau dipaksa dilepas.
+4. **Circular Wait** – Siklus menunggu terbentuk:
+   P0 → P1 → P2 → P3 → P4 → kembali ke P0.
+
+Karena keempat kondisi ini aktif secara bersamaan, deadlock **pasti terjadi**.
+
+---
+
+## **Analisis Eksperimen 2 – *Fixed Version (Semaphore / Monitor)*
+
+Eksperimen kedua menggunakan tiga solusi berbeda untuk mencegah deadlock. Ketiganya berhasil menghilangkan setidaknya satu dari empat kondisi Coffman, sehingga deadlock tidak bisa terbentuk.
+
+### **1. Global Mutex (Semaphore = 1)**
+
+Dalam solusi ini, hanya **satu filsuf** yang boleh mengambil garpu pada satu waktu.
+
+Hasil pengamatan:
+
+* Tidak pernah terjadi deadlock.
+* Hold-and-wait dihilangkan karena filsuf langsung mengambil **dua garpu sekaligus**.
+* Kekurangannya: tingkat paralelisme rendah, karena hanya satu filsuf bisa makan dalam satu periode waktu.
+
+### **2. Room Semaphore (maksimal 4 filsuf mencoba makan)**
+
+Dengan membatasi hanya 4 filsuf yang boleh mencoba mengambil garpu:
+
+* Siklus circular wait **tidak dapat terbentuk**, karena tidak semua filsuf bisa masuk ke fase “mengambil garpu”.
+* Deadlock hilang.
+* Paralelisme lebih baik dibanding mutex global.
+* Pendekatan ini banyak digunakan dalam implementasi Dining Philosophers modern.
+
+### **3. Odd–Even Fork Picking Rule**
+
+Filsuf genap mengambil garpu kiri dahulu, filsuf ganjil mengambil garpu kanan dahulu.
+
+* Urutan pengambilan garpu **tidak lagi simetris**, sehingga circular wait otomatis hilang.
+* Deadlock tidak terjadi.
+* Paralelisme bagus, beberapa filsuf dapat makan secara bersamaan.
+
+> **Kesimpulan eksperimen 2:**
+> Semua versi perbaikan sukses menghilangkan deadlock dengan memutus "hold-and-wait" atau "circular wait" yang muncul pada eksperimen pertama.
+
+---
+
+**Kesimpulan Umum Eksperimen**
+
+1. **Eksperimen 1 membuktikan bahwa deadlock terjadi ketika seluruh kondisi Coffman terpenuhi.**
+   Dining Philosophers versi klasik tanpa mekanisme pencegah memang rawan mengalami kebuntuan total.
+
+2. **Eksperimen 2 menunjukkan bahwa deadlock dapat dicegah dengan mengubah aturan pengambilan sumber daya.**
+   Pendekatan seperti mutex global, room semaphore, dan odd–even rule efektif dalam menghilangkan hold-and-wait atau circular wait.
+
+3. **Setiap solusi memiliki trade-off:**
+
+   * *Mutex Global*: paling aman tetapi mengurangi paralelisme.
+   * *Room Semaphore*: seimbang antara keamanan dan performa.
+   * *Odd–Even*: paling efisien dan tetap aman.
+
+4. **Pemahaman pola deadlock dan strategi sinkronisasi sangat penting dalam sistem operasi**, terutama pada lingkungan multi-threaded dan multi-prosesor.
+
 
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+Dari rangkaian praktikum mengenai Dining Philosophers Problem dan mekanisme sinkronisasi proses, dapat disimpulkan bahwa:
+
+1.Deadlock dapat terjadi ketika seluruh kondisi Coffman terpenuhi, yaitu mutual exclusion, hold and wait, no preemption, dan circular wait. Hal ini terbukti pada Eksperimen 1, di mana seluruh filsuf mengambil garpu kiri terlebih dahulu sehingga terjadi antrian melingkar dan tidak ada filsuf yang dapat melanjutkan ke proses makan.
+
+2.Eksperimen 2 membuktikan bahwa deadlock dapat dicegah dengan menerapkan mekanisme sinkronisasi yang tepat. Tiga teknik—global mutex, pembatasan maksimal filsuf yang mencoba makan (room semaphore), dan odd–even rule—berhasil mencegah deadlock dengan memutus kondisi hold-and-wait atau circular wait.
+
+3.Setiap metode pencegahan deadlock memiliki kelebihan dan kekurangan masing-masing.
+Global mutex sangat aman namun mengurangi paralelisme.
+Room semaphore meningkatkan efisiensi karena beberapa filsuf tetap bisa makan secara bersamaan.
+Odd–even rule adalah solusi paling ringan dan efisien karena tidak membutuhkan semaphore tambahan.
+
+4.Pemahaman sinkronisasi dan pencegahan deadlock sangat penting dalam sistem operasi, terutama dalam sistem yang menjalankan banyak proses secara bersamaan. Praktikum ini memberikan gambaran nyata mengenai bagaimana kesalahan pengaturan resource dapat menyebabkan kebuntuan dan bagaimana mekanisme sinkronisasi dapat mengatasinya.
+
+Secara keseluruhan, praktikum ini menegaskan bahwa pentingnya desain sinkronisasi yang benar bukan hanya untuk mencegah deadlock, tetapi juga untuk menjaga efisiensi, keadilan, dan stabilitas sistem.
 
 ---
 
