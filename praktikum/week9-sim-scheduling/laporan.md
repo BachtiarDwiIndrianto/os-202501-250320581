@@ -55,26 +55,118 @@ Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
 ---
 
 ## Kode / Perintah
-Tuliskan potongan kode atau perintah utama:
-```bash
-uname -a
-lsmod | head
-dmesg | head
+
+```python
+
+# PROGRAM SIMULASI FCFS
+
+# Data proses (nama proses, waktu datang, dan burst time)
+proses = [
+    {"nama": "P1", "arrival": 0, "burst": 6},
+    {"nama": "P2", "arrival": 1, "burst": 8},
+    {"nama": "P3", "arrival": 2, "burst": 7},
+    {"nama": "P4", "arrival": 3, "burst": 3},
+]
+
+# Variabel untuk menyimpan waktu CPU saat ini
+waktu_sekarang = 0
+
+# Variabel untuk menghitung total waiting dan turnaround
+total_waiting = 0
+total_turnaround = 0
+
+# Menampilkan judul tabel
+print("FCFS (First Come First Served)")
+print("-" * 75)
+print(f"{'Proses':<8}{'Burst':<8}{'Arrival':<10}{'Start':<8}{'Waiting':<10}{'Turnaround':<12}{'Finish':<8}")
+print("-" * 75)
+
+# Proses perhitungan FCFS
+for p in proses:
+    # Start time ditentukan oleh waktu CPU atau arrival time
+    start = max(waktu_sekarang, p["arrival"])
+
+    # Waiting time = start time - arrival time
+    waiting = start - p["arrival"]
+
+    # Turnaround time = waiting time + burst time
+    turnaround = waiting + p["burst"]
+
+    # Finish time = start time + burst time
+    finish = start + p["burst"]
+
+    # Update waktu CPU
+    waktu_sekarang = finish
+
+    # Menjumlahkan total waiting dan turnaround
+    total_waiting += waiting
+    total_turnaround += turnaround
+
+    # Menampilkan hasil per proses
+    print(f"{p['nama']:<8}{p['burst']:<8}{p['arrival']:<10}{start:<8}{waiting:<10}{turnaround:<12}{finish:<8}")
+
+# Menghitung nilai rata-rata
+rata_waiting = total_waiting / len(proses)
+rata_turnaround = total_turnaround / len(proses)
+
+# Menampilkan rata-rata
+print("-" * 75)
+print(f"{'Rata-rata':<34}{rata_waiting:<10.2f}{rata_turnaround:<12.2f}")
 ```
 
 ---
 
 ## Hasil Eksekusi
 Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+<img width="1919" height="1079" alt="Screenshot 2026-01-01 145108" src="https://github.com/user-attachments/assets/1fd46194-ba90-48e9-bd88-8c3d0586ba0d" />
+
 
 ---
 
 ## Analisis
-- Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
+- Alur dalam program tersebut
+```
+1. Program dimulai dengan menyiapkan data proses yang terdiri dari nama proses, waktu kedatangan (*arrival time*), dan waktu eksekusi (*burst time*).
+2. Waktu CPU diinisialisasi mulai dari 0 menggunakan variabel `waktu_sekarang`.
+3. Program memproses setiap proses satu per satu sesuai urutan kedatangan, sesuai dengan prinsip algoritma FCFS (First Come First Served).
+4. Untuk setiap proses, program menghitung:
+   - **Start Time**, yaitu waktu mulai proses dieksekusi.
+   - **Waiting Time**, yaitu selisih antara start time dan arrival time.
+   - **Turnaround Time**, yaitu total waktu proses berada di sistem.
+   - **Finish Time**, yaitu waktu proses selesai dieksekusi.
+5. Setelah satu proses selesai, nilai `waktu_sekarang` diperbarui ke waktu selesai proses tersebut.
+6. Hasil perhitungan setiap proses ditampilkan dalam bentuk tabel agar mudah dibaca.
+7. Di akhir program, dihitung rata-rata waiting time dan turnaround time sebagai evaluasi kinerja algoritma FCFS.
+```
+- Bandingkan dengan perhitungan manual
+  - Manual dengan excel
+  <img width="779" height="311" alt="Screenshot 2026-01-01 142425" src="https://github.com/user-attachments/assets/506c58ef-c759-4394-9559-de5616dfc08a" />
 
+  - Tabel Hasil Simulasi FCFS (First Come First Served)
+
+| Proses | Burst Time | Arrival Time | Start | Waiting | Turnaround | Finish |
+|:-----:|:----------:|:------------:|:-----:|:-------:|:----------:|:------:|
+| P1    | 6          | 0            | 0     | 0       | 6          | 6      |
+| P2    | 8          | 1            | 6     | 5       | 13         | 14     |
+| P3    | 7          | 2            | 14    | 12      | 19         | 21     |
+| P4    | 3          | 3            | 21    | 18      | 21         | 24     |
+| **Rata-rata** | — | — | — | **8,75** | **14,75** | — |
+
+   - Hasil Program(Phyton)
+
+<img width="793" height="266" alt="Screenshot 2026-01-01 150633" src="https://github.com/user-attachments/assets/325e0633-dee3-441a-a492-1a2c5d17ae06" />
+
+   
+- Jelaskan Kelebihan dan Keterbatasan Simulasi
+  - Kelebihan
+    - Perhitungan dilakukan secara otomatis dan cepat.
+    - Mengurangi kesalahan dalam perhitungan manual.
+    - Memudahkan pemahaman cara kerja algoritma penjadwalan CPU.
+      
+  - Keterbatasan
+    - Hanya mensimulasikan kondisi tertentu, bukan sistem nyata.
+    - Hasil simulasi bergantung pada dataset yang digunakan.
+    - Tidak memperhitungkan faktor lain seperti interupsi atau overhead sistem.
 ---
 
 ## Kesimpulan
