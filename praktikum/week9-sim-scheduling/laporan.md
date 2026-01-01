@@ -56,6 +56,7 @@ Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
 
 ## Kode / Perintah
 
+### FCFS
 ```python
 
 # PROGRAM SIMULASI FCFS
@@ -113,17 +114,76 @@ rata_turnaround = total_turnaround / len(proses)
 print("-" * 75)
 print(f"{'Rata-rata':<34}{rata_waiting:<10.2f}{rata_turnaround:<12.2f}")
 ```
+### SJF
 
+```phyton
+# PROGRAM SIMULASI SJF (Non-Preemptive)
+
+# Data proses
+proses = [
+    {"nama": "P1", "arrival": 0, "burst": 6},
+    {"nama": "P2", "arrival": 1, "burst": 8},
+    {"nama": "P3", "arrival": 2, "burst": 7},
+    {"nama": "P4", "arrival": 3, "burst": 3},
+]
+
+waktu_sekarang = 0
+total_waiting = 0
+total_turnaround = 0
+selesai = []
+
+print("SJF (Shortest Job First - Non Preemptive)")
+print("-" * 80)
+print(f"{'Proses':<8}{'Burst':<8}{'Arrival':<10}{'Start':<8}{'Waiting':<10}{'Turnaround':<12}{'Finish':<8}")
+print("-" * 80)
+
+while proses:
+    # Ambil proses yang sudah datang
+    tersedia = [p for p in proses if p["arrival"] <= waktu_sekarang]
+
+    # Jika belum ada proses yang datang
+    if not tersedia:
+        waktu_sekarang += 1
+        continue
+
+    # Pilih proses dengan burst time terkecil
+    proses_terpendek = min(tersedia, key=lambda x: x["burst"])
+    proses.remove(proses_terpendek)
+
+    start = waktu_sekarang
+    waiting = start - proses_terpendek["arrival"]
+    turnaround = waiting + proses_terpendek["burst"]
+    finish = start + proses_terpendek["burst"]
+
+    waktu_sekarang = finish
+    total_waiting += waiting
+    total_turnaround += turnaround
+
+    print(f"{proses_terpendek['nama']:<8}{proses_terpendek['burst']:<8}{proses_terpendek['arrival']:<10}"
+          f"{start:<8}{waiting:<10}{turnaround:<12}{finish:<8}")
+
+    selesai.append(proses_terpendek)
+
+rata_waiting = total_waiting / len(selesai)
+rata_turnaround = total_turnaround / len(selesai)
+
+print("-" * 80)
+print(f"{'Rata-rata':<36}{rata_waiting:<10.2f}{rata_turnaround:<12.2f}")
+```
 ---
 
 ## Hasil Eksekusi
 Sertakan screenshot hasil percobaan atau diagram:
+- FCFS
 <img width="1919" height="1079" alt="Screenshot 2026-01-01 145108" src="https://github.com/user-attachments/assets/1fd46194-ba90-48e9-bd88-8c3d0586ba0d" />
-
+- SJF
+<img width="1919" height="1079" alt="Eksperimen_Program_simulasi_scheduling_SJF" src="https://github.com/user-attachments/assets/69b22f38-8053-42b9-ab50-df5a274adde9" />
 
 ---
 
 ## Analisis
+
+### FCFS
 - Alur dalam program tersebut
 ```
 1. Program dimulai dengan menyiapkan data proses yang terdiri dari nama proses, waktu kedatangan (*arrival time*), dan waktu eksekusi (*burst time*).
@@ -138,6 +198,7 @@ Sertakan screenshot hasil percobaan atau diagram:
 6. Hasil perhitungan setiap proses ditampilkan dalam bentuk tabel agar mudah dibaca.
 7. Di akhir program, dihitung rata-rata waiting time dan turnaround time sebagai evaluasi kinerja algoritma FCFS.
 ```
+
 - Bandingkan dengan perhitungan manual
   - Manual dengan excel
   <img width="779" height="311" alt="Screenshot 2026-01-01 142425" src="https://github.com/user-attachments/assets/506c58ef-c759-4394-9559-de5616dfc08a" />
@@ -167,6 +228,59 @@ Sertakan screenshot hasil percobaan atau diagram:
     - Hanya mensimulasikan kondisi tertentu, bukan sistem nyata.
     - Hasil simulasi bergantung pada dataset yang digunakan.
     - Tidak memperhitungkan faktor lain seperti interupsi atau overhead sistem.
+   
+
+### SJF
+- Alur dalam program
+```
+1. Program dimulai dengan menyiapkan data proses yang berisi nama proses, waktu kedatangan, dan burst time.
+2. Variabel `waktu_sekarang` diinisialisasi untuk menyimpan waktu CPU saat ini.
+3. Program melakukan perulangan selama masih ada proses yang belum dieksekusi.
+4. Pada setiap perulangan, program memilih proses yang **sudah datang** (arrival time ≤ waktu CPU).
+5. Dari proses yang tersedia, program memilih proses dengan **burst time paling kecil** sesuai algoritma SJF.
+6. Program menghitung:
+   - **Start Time**, yaitu waktu mulai proses dieksekusi.
+   - **Waiting Time**, yaitu selisih antara start time dan arrival time.
+   - **Turnaround Time**, yaitu total waktu proses berada di sistem.
+   - **Finish Time**, yaitu waktu proses selesai dieksekusi.
+7. Setelah proses selesai, waktu CPU diperbarui ke finish time proses tersebut.
+8. Proses yang sudah dieksekusi dihapus dari daftar proses.
+9. Setelah semua proses selesai, program menghitung dan menampilkan rata-rata waiting time dan turnaround time.
+```
+- Bandingkan dengan perhitungan manual
+  - Manual dengan excel
+    
+    <img width="778" height="268" alt="SJF_PerhitunganManual_Excel" src="https://github.com/user-attachments/assets/27378427-cf54-445f-8bc3-23f89e928fc8" />
+
+  - Tabel Hasil Simulasi SJF (Shortest Job First – Non-Preemptive)
+
+| Proses | Burst Time | Arrival Time | Start | Waiting | Turnaround | Finish |
+|:-----:|:----------:|:------------:|:-----:|:-------:|:----------:|:------:|
+| P1    | 6          | 0            | 0     | 0       | 6          | 6      |
+| P4    | 3          | 3            | 6     | 3       | 6          | 9      |
+| P3    | 7          | 2            | 9     | 7       | 14         | 16     |
+| P2    | 8          | 1            | 16    | 15      | 23         | 24     |
+| **Rata-rata** | — | — | — | **6,25** | **12,25** | — |
+
+  - Hasil Program(Phyton)
+    
+    <img width="796" height="290" alt="SJF_Tabel_HasilPogram" src="https://github.com/user-attachments/assets/d3e0a506-277d-4e42-80a4-19fb5ef1379f" />
+
+
+  - Jelaskan Kelebihan dan Keterbatasan Simulasi
+    - Kelebihan
+      - Menghasilkan waktu tunggu rata-rata yang lebih kecil dibandingkan FCFS.
+      - Proses dengan waktu eksekusi singkat dapat selesai lebih cepat.
+      - Efisien untuk sistem dengan banyak proses berdurasi pendek.
+
+
+
+
+    - Keterbatasan
+      - Membutuhkan informasi burst time setiap proses.
+      - Proses dengan burst time besar dapat menunggu terlalu lama (starvation).
+      - Lebih sulit diimplementasikan dibandingkan FCFS.
+    
 ---
 
 ## Kesimpulan
