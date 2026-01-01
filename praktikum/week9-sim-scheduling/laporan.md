@@ -22,7 +22,7 @@ Setelah menyelesaikan tugas ini, mahasiswa mampu:
 ---
 
 ## Dasar Teori
-Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
+Penjadwalan CPU mengatur urutan proses yang dijalankan. FCFS menjalankan proses sesuai urutan kedatangan, sedangkan SJF memilih proses dengan waktu eksekusi terpendek. Waiting time adalah waktu proses menunggu, sedangkan turnaround time adalah total waktu proses di sistem. Simulasi membantu membandingkan kinerja kedua algoritma ini.Sama seperti week 5, namun pada week 9 mengoprasikan penjadwalan CPU mengunakan bahasa pemograman PHYTON.
 
 ---
 
@@ -284,8 +284,11 @@ Sertakan screenshot hasil percobaan atau diagram:
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
-
+- Akurasi Simulasi: Program simulasi yang dibuat terbukti akurat dalam menghitung waiting time dan turnaround time, di mana hasilnya konsisten dengan perhitungan manual menggunakan Excel.
+  
+- Perbandingan Efisiensi: Algoritma SJF (Shortest Job First) memberikan nilai rata-rata waiting time yang lebih rendah ($6,25$) dibandingkan FCFS ($8,75$), membuktikan bahwa memprioritaskan proses pendek meningkatkan efisiensi waktu tunggu.
+  
+- Karakteristik Algoritma: FCFS jauh lebih mudah diimplementasikan secara logika karena hanya mengikuti urutan kedatangan, sedangkan SJF memerlukan logika tambahan untuk memantau status waktu CPU dan melakukan pengurutan berdasarkan burst time terkecil.
 ---
 
 ## Quiz
@@ -338,14 +341,23 @@ Untuk dataset besar, simulasi lebih unggul dibandingkan perhitungan manual karen
 
 4. [ Algoritma mana yang lebih mudah diimplementasikan? Jelaskan.]  
    **Jawaban:**  
+Algoritma yang lebih mudah diimplementasikan adalah **FCFS (First Come First Served)**, karena:
+- Proses dijalankan sesuai urutan kedatangan.
+- Tidak memerlukan proses pemilihan atau perbandingan burst time.
+- Logika program sederhana dan mudah dipahami.
+- Cocok untuk implementasi dasar dan pembelajaran awal.
 
 ---
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
-
+- Apa bagian yang paling menantang minggu ini?
+  
+  Bagian paling menantang adalah mengimplementasikan logika FCFS dan SJF ke dalam kode program.
+  
+- Bagaimana cara Anda mengatasinya?
+  
+  Saya mengatasinya dengan menggunakan teknik list comprehension di Python untuk memfilter proses yang tersedia
 ---
 
 **Credit:**  
