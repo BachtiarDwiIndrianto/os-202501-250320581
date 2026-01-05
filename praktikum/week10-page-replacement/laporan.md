@@ -9,6 +9,13 @@ Topik: Manajemen Memori – Page Replacement (FIFO & LRU)
 - **Kelas** : 1DSRA
 
 ---
+## A. Deskripsi Singkat
+Pada praktikum minggu ini, mahasiswa akan mempelajari **manajemen memori virtual**, khususnya mekanisme **page replacement**.  
+Fokus utama praktikum adalah memahami bagaimana sistem operasi mengganti halaman (*page*) di memori utama ketika terjadi *page fault*, serta membandingkan performa algoritma **FIFO (First-In First-Out)** dan **LRU (Least Recently Used)**.
+
+Mahasiswa akan mengimplementasikan **program simulasi page replacement**, menjalankan dataset uji, dan menyajikan hasil dalam bentuk tabel atau grafik.
+
+---
 
 ## Tujuan
 Setelah menyelesaikan tugas ini, mahasiswa mampu:
@@ -26,7 +33,8 @@ C. Ketentuan Teknis
 ---
 
 ## Dasar Teori
-Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
+
+Manajemen memori virtual menggunakan teknik paging untuk mengelola alokasi memori antara RAM dan disk. Ketika halaman yang dibutuhkan tidak ada di memori utama, terjadi page fault sehingga sistem harus memilih halaman yang akan diganti (page replacement). Algoritma FIFO mengganti halaman berdasarkan waktu masuk tertua, sedangkan LRU memilih halaman yang paling lama tidak diakses, yang umumnya lebih efisien karena memanfaatkan prinsip locality of reference di mana program cenderung mengakses data yang baru digunakan.
 
 ---
 
@@ -166,10 +174,18 @@ Berdasarkan hasil simulasi dengan jumlah frame sebanyak **3**, algoritma **LRU**
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+LRU lebih efisien - Menghasilkan page fault lebih sedikit (9) dibanding FIFO (10) dengan konfigurasi yang sama.
+Strategi berbeda - FIFO hanya melihat waktu masuk, sedangkan LRU mempertimbangkan pola penggunaan terbaru.
+LRU lebih optimal - Cocok untuk pola akses dunia nyata karena mengikuti prinsip locality of reference.
 
 ---
 
+## Tugas
+1. Buat program simulasi page replacement FIFO dan LRU. &#10003;
+2. Jalankan simulasi dengan dataset uji. &#10003;
+3. Sajikan hasil simulasi dalam tabel atau grafik. &#10003;
+4. Tulis laporan praktikum pada `laporan.md`. &#10003;
+   
 ## Quiz
 1. Apa perbedaan utama FIFO dan LRU?  
    **Jawaban:**
@@ -214,8 +230,8 @@ LRU umumnya lebih baik karena memanfaatkan prinsip lokalitas referensi (temporal
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
+- Apa bagian yang paling menantang minggu ini?  Memahami dan mengimplementasikan algoritma LRU secara akurat, khususnya dalam melacak waktu penggunaan terakhir setiap halaman.
+- Bagaimana cara Anda mengatasinya?  Membaca referensi teori tambahan, melakukan simulasi manual step-by-step pada kertas, dan melakukan debugging kode secara bertahap untuk memastikan logika berjalan benar.
 
 ---
 
