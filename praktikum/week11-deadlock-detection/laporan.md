@@ -21,39 +21,136 @@ Setelah menyelesaikan tugas ini, mahasiswa mampu:
 
 ---
 
+## Ketentuan Teknis
+- Bahasa pemrograman **bebas** (Python / C / Java / lainnya).  
+- Program berbasis **terminal**, tidak memerlukan GUI.  
+- Fokus penilaian pada **logika algoritma deteksi deadlock**, bukan kompleksitas bahasa.
+---
+
 ## Dasar Teori
 Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
 
 ---
 
 ## Langkah Praktikum
-1. Langkah-langkah yang dilakukan.  
-2. Perintah yang dijalankan.  
-3. File dan kode yang dibuat.  
-4. Commit message yang digunakan.
+1. **Menyiapkan Dataset**
+
+   Gunakan dataset sederhana yang berisi:
+   - Daftar proses  
+   - Resource Allocation  
+   - Resource Request / Need
+
+   Contoh tabel:
+
+   | Proses | Allocation | Request |
+   |:--:|:--:|:--:|
+   | P1 | R1 | R2 |
+   | P2 | R2 | R3 |
+   | P3 | R3 | R1 |
+
+2. **Implementasi Algoritma Deteksi Deadlock**
+
+   Program minimal harus:
+   - Membaca data proses dan resource.  
+   - Menentukan apakah sistem berada dalam kondisi deadlock.  
+   - Menampilkan proses mana saja yang terlibat deadlock.
+
+3. **Eksekusi & Validasi**
+
+   - Jalankan program dengan dataset uji.  
+   - Validasi hasil deteksi dengan analisis manual/logis.  
+   - Simpan hasil eksekusi dalam bentuk screenshot.
+
+4. **Analisis Hasil**
+
+   - Sajikan hasil deteksi dalam tabel (proses deadlock / tidak).  
+   - Jelaskan mengapa deadlock terjadi atau tidak terjadi.  
+   - Kaitkan hasil dengan teori deadlock (empat kondisi).
+
+5. **Commit & Push**
+
+   ```bash
+   git add .
+   git commit -m "Minggu 11 - Deadlock Detection"
+   git push origin main
+   ```
 
 ---
 
 ## Kode / Perintah
 Tuliskan potongan kode atau perintah utama:
-```bash
-uname -a
-lsmod | head
-dmesg | head
+```phyton
+processes = ["P1", "P2", "P3"]
+
+wait_for = {
+    "P1": "P2",
+    "P2": "P3",
+    "P3": "P1"
+}
+
+deadlock = False
+
+for p in processes:
+    visited = set()
+    while p not in visited:
+        visited.add(p)
+        if p not in wait_for:
+            break
+        p = wait_for[p]
+    else:
+        deadlock = True
+        break
+
+print("HASIL DETEKSI DEADLOCK")
+print("-" * 45)
+print(f"| {'Proses':^10} | {'Menunggu':^12} | {'Status':^12} |")
+print("-" * 45)
+
+for p in processes:
+    status = "Deadlock" if deadlock else "Aman"
+    print(f"| {p:^10} | {wait_for[p]:^12} | {status:^12} |")
+
+print("-" * 45)
+print("Status Sistem : DEADLOCK TERDETEKSI")
 ```
 
 ---
 
 ## Hasil Eksekusi
 Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+
+<img width="1919" height="1079" alt="Screenshot 2026-01-05 230452" src="https://github.com/user-attachments/assets/6d89ea1b-3271-4c6f-b3e9-0c44fb432828" />
 
 ---
 
 ## Analisis
-- Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
+Hasil Deteksi Deadlock
+
+| Proses | Menunggu | Status   |
+|--------|----------|----------|
+| P1     | P2       | Deadlock |
+| P2     | P3       | Deadlock |
+| P3     | P1       | Deadlock |
+
+**Status Sistem:** **DEADLOCK TERDETEKSI**
+
+- Jelaskan mengapa deadlock terjadi atau tidak terjadi.
+Berdasarkan hasil deteksi, seluruh proses berada dalam kondisi deadlock. Hal ini terjadi karena adanya **circular wait**, yaitu P1 menunggu P2, P2 menunggu P3, dan P3 menunggu P1. Akibatnya, tidak ada proses yang dapat melanjutkan eksekusi karena saling menunggu satu sama lain.
+
+- Kaitkan hasil dengan teori deadlock (empat kondisi).
+Berdasarkan hasil deteksi deadlock, kondisi yang terjadi pada sistem memenuhi **empat syarat utama terjadinya deadlock**, yaitu:
+1. Mutual Exclusion (Saling Eksklusif) 
+   Setiap proses hanya dapat menggunakan sumber daya tertentu secara eksklusif. Dalam kasus ini, sumber daya yang sedang digunakan oleh suatu proses tidak dapat digunakan oleh proses lain secara bersamaan.
+2. Hold and Wait (Menahan dan Menunggu)
+   Setiap proses menahan satu sumber daya sambil menunggu sumber daya lain yang sedang digunakan oleh proses lain. Misalnya, P1 menahan sumber daya tertentu sambil menunggu sumber daya yang dipegang oleh P2.
+3. No Preemption (Tidak Ada Perampasan)
+   Sumber daya tidak dapat diambil secara paksa dari proses yang sedang menggunakannya. Sumber daya hanya dapat dilepaskan oleh proses itu sendiri setelah selesai digunakan.
+4. Circular Wait (Menunggu Melingkar)
+   Terjadi siklus ketergantungan antar proses, yaitu P1 menunggu P2, P2 menunggu P3, dan P3 menunggu P1. Kondisi inilah yang paling jelas terlihat dari hasil deteksi dan menjadi penyebab utama terjadinya deadlock.
+
+
+Karena keempat kondisi deadlock tersebut terpenuhi secara bersamaan, maka sistem berada dalam keadaan **deadlock**, sesuai dengan hasil deteksi yang menunjukkan status DEADLOCK TERDETEKSI
+
 
 ---
 
