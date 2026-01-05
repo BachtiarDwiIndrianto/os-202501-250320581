@@ -20,6 +20,9 @@ Setelah menyelesaikan tugas ini, mahasiswa mampu:
 - 5 Menyajikan hasil simulasi dalam laporan yang sistematis.
   
 C. Ketentuan Teknis
+- Bahasa pemrograman **bebas** (Python / C / Java / lainnya).
+- Program berbasis **terminal** (tidak wajib GUI).
+- Fokus penilaian pada **logika algoritma dan keakuratan hasil simulasi**.
 ---
 
 ## Dasar Teori
@@ -28,33 +31,137 @@ Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
 ---
 
 ## Langkah Praktikum
-1. Langkah-langkah yang dilakukan.  
-2. Perintah yang dijalankan.  
-3. File dan kode yang dibuat.  
-4. Commit message yang digunakan.
+1. **Menyiapkan Dataset**
 
+   Gunakan *reference string* berikut sebagai contoh:
+   ```
+   7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2
+   ```
+   Jumlah frame memori: **3 frame**.
+
+2. **Implementasi FIFO**
+
+   - Simulasikan penggantian halaman menggunakan algoritma FIFO.
+   - Catat setiap *page hit* dan *page fault*.
+   - Hitung total *page fault*.
+
+3. **Implementasi LRU**
+
+   - Simulasikan penggantian halaman menggunakan algoritma LRU.
+   - Catat setiap *page hit* dan *page fault*.
+   - Hitung total *page fault*.
+
+4. **Eksekusi & Validasi**
+
+   - Jalankan program untuk FIFO dan LRU.
+   - Pastikan hasil simulasi logis dan konsisten.
+   - Simpan screenshot hasil eksekusi.
 ---
 
 ## Kode / Perintah
 Tuliskan potongan kode atau perintah utama:
-```bash
-uname -a
-lsmod | head
-dmesg | head
+```phyton
+reference_string = [7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2]
+frames = 3
+
+
+def print_process_table(title, steps):
+    print(f"\n{title}")
+    print("+" + "-"*8 + "+" + "-"*10 + "+" + "-"*10 + "+" + "-"*10 + "+" + "-"*10 + "+")
+    print("| Page   | Frame 1  | Frame 2  | Frame 3  | Status   |")
+    print("+" + "-"*8 + "+" + "-"*10 + "+" + "-"*10 + "+" + "-"*10 + "+" + "-"*10 + "+")
+    
+    for page, mem, status in steps:
+        print(f"| {page:<6} | {mem[0]:<8} | {mem[1]:<8} | {mem[2]:<8} | {status:<8} |")
+    
+    print("+" + "-"*8 + "+" + "-"*10 + "+" + "-"*10 + "+" + "-"*10 + "+" + "-"*10 + "+")
+
+
+# ================= FIFO =================
+def fifo_page_replacement(ref, frames):
+    memory = ['-'] * frames
+    fifo_index = 0
+    steps = []
+    page_fault = 0
+
+    for page in ref:
+        if page in memory:
+            steps.append((page, memory.copy(), "HIT"))
+        else:
+            page_fault += 1
+            memory[fifo_index] = page
+            fifo_index = (fifo_index + 1) % frames
+            steps.append((page, memory.copy(), "FAULT"))
+
+    return page_fault, steps
+
+
+# ================= LRU =================
+def lru_page_replacement(ref, frames):
+    memory = ['-'] * frames
+    last_used = {}
+    steps = []
+    page_fault = 0
+
+    for time, page in enumerate(ref):
+        if page in memory:
+            steps.append((page, memory.copy(), "HIT"))
+        else:
+            page_fault += 1
+            if '-' in memory:
+                index = memory.index('-')
+            else:
+                lru_page = min(last_used, key=last_used.get)
+                index = memory.index(lru_page)
+                del last_used[lru_page]
+
+            memory[index] = page
+            steps.append((page, memory.copy(), "FAULT"))
+
+        last_used[page] = time
+
+    return page_fault, steps
+
+
+# ================= EKSEKUSI =================
+fifo_fault, fifo_steps = fifo_page_replacement(reference_string, frames)
+lru_fault, lru_steps = lru_page_replacement(reference_string, frames)
+
+print_process_table("PROSES FIFO (First-In First-Out)", fifo_steps)
+print_process_table("PROSES LRU (Least Recently Used)", lru_steps)
+
+# ================= RINGKASAN =================
+print("\nRINGKASAN HASIL AKHIR")
+print("+" + "-"*12 + "+" + "-"*14 + "+" + "-"*14 + "+")
+print("| Algoritma | Jumlah Frame | Page Fault   |")
+print("+" + "-"*12 + "+" + "-"*14 + "+" + "-"*14 + "+")
+print(f"| FIFO      | {frames:^12} | {fifo_fault:^12} |")
+print(f"| LRU       | {frames:^12} | {lru_fault:^12} |")
+print("+" + "-"*12 + "+" + "-"*14 + "+" + "-"*14 + "+")
 ```
 
 ---
 
 ## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+
+<img width="1664" height="3218" alt="FIFO DAN LRU" src="https://github.com/user-attachments/assets/51ad80d4-6d57-403d-9d8a-e8c910f7a3b7" />
+<img width="896" height="990" alt="Screenshot 2026-01-05 223802" src="https://github.com/user-attachments/assets/d6d834fc-100f-41c6-bdc7-abea1de671e4" />
 
 ---
 
 ## Analisis
-- Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
+
+| Algoritma | Jumlah Frame | Page Fault |
+|-----------|--------------|------------|
+| FIFO      | 3            | 10         |
+| LRU       | 3            | 9          |
+
+Berdasarkan hasil simulasi dengan jumlah frame sebanyak **3**, algoritma **LRU** menghasilkan jumlah *page fault* yang lebih sedikit dibandingkan algoritma **FIFO**. Hal ini menunjukkan bahwa algoritma **LRU lebih efisien** dalam pengelolaan memori karena mempertimbangkan penggunaan halaman terbaru.
+
+- Jelaskan mengapa jumlah page fault bisa berbeda?
+  perbedaan strategi  yang menyebabkan jumlah page fault antara FIFO dan LRU tidak sama, dan umumnya LRU lebih efisien dalam memanfaatkan memori
+- Analisis algoritma mana yang lebih efisien dan alasannya?
+  Menurut saya LRU lebih efisien karena algoritma ini mempertimbangkan pola penggunaan halaman, yaitu dengan mempertahankan halaman yang paling sering atau paling baru digunakan agar tetap berada di memori. Dengan demikian, kemungkinan terjadinya page fault dapat dikurangi.
 
 ---
 
