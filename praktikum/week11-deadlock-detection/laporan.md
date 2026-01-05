@@ -1,5 +1,5 @@
 
-# Laporan Praktikum Minggu [X]
+# Laporan Praktikum Minggu [11]
 Topik: Simulasi dan Deteksi Deadlock
 
 ---
@@ -28,8 +28,14 @@ Setelah menyelesaikan tugas ini, mahasiswa mampu:
 ---
 
 ## Dasar Teori
-Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
+Deadlock adalah keadaan kebuntuan sistem dimana proses-proses saling menunggu tanpa bisa melanjutkan eksekusi. Terdapat empat kondisi yang harus terpenuhi agar deadlock terjadi:
 
+- Mutual Exclusion - Sumber daya hanya bisa dipakai satu proses pada satu waktu
+- Hold and Wait - Proses memegang sumber daya sambil menunggu sumber daya lain
+- No Preemption - Sumber daya tidak bisa diambil paksa dari proses
+- Circular Wait - Ada rantai proses yang saling menunggu (P1 tunggu P2, P2 tunggu P3, P3 tunggu P1)
+
+Deteksi deadlock dilakukan dengan memeriksa apakah ada siklus (circular wait) dalam hubungan ketergantungan antar proses. Jika ditemukan siklus, maka sistem dalam keadaan deadlock.
 ---
 
 ## Langkah Praktikum
@@ -157,9 +163,16 @@ Karena keempat kondisi deadlock tersebut terpenuhi secara bersamaan, maka sistem
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+- Deadlock berhasil dideteksi dalam simulasi ini, ditunjukkan oleh status "DEADLOCK TERDETEKSI".
+- Penyebab utama deadlock adalah adanya circular wait, di mana P1 menunggu P2, P2 menunggu P3, dan P3 menunggu P1.
+- Hasil simulasi sesuai teori, karena keempat kondisi deadlock (mutual exclusion, hold and wait, no preemption, circular wait) terpenuhi secara bersamaan.
 
 ---
+### Tugas
+1. Buat program simulasi deteksi deadlock.&#10003;
+2. Jalankan program dengan dataset uji.&#10003;
+3. Sajikan hasil analisis dalam tabel dan narasi.&#10003;
+4. Tulis laporan praktikum pada `laporan.md`.&#10003;
 
 ## Quiz
 1. Apa perbedaan antara *deadlock prevention*, *avoidance*, dan *detection*?
@@ -210,8 +223,10 @@ Bayangkan sistem dengan banyak proses yang saling bergantung (misalnya, printer 
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
+- Apa bagian yang paling menantang minggu ini?  Memahami dan mengimplementasikan algoritma deteksi deadlock, khususnya dalam mengidentifikasi kondisi circular wait yang menjadi penyebab utama deadlock.
+- Bagaimana cara Anda mengatasinya?  Mempelajari teori dasar deadlock, melakukan simulasi manual dengan diagram proses dan sumber daya, serta menulis kode sederhana untuk memvisualisasikan ketergantungan antar proses sehingga lebih mudah memahami mekanisme deteksi.
+
+
 
 ---
 
