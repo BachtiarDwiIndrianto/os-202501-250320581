@@ -135,9 +135,11 @@ Hasil Deteksi Deadlock
 **Status Sistem:** **DEADLOCK TERDETEKSI**
 
 - Jelaskan mengapa deadlock terjadi atau tidak terjadi.
+- 
 Berdasarkan hasil deteksi, seluruh proses berada dalam kondisi deadlock. Hal ini terjadi karena adanya **circular wait**, yaitu P1 menunggu P2, P2 menunggu P3, dan P3 menunggu P1. Akibatnya, tidak ada proses yang dapat melanjutkan eksekusi karena saling menunggu satu sama lain.
 
 - Kaitkan hasil dengan teori deadlock (empat kondisi).
+  
 Berdasarkan hasil deteksi deadlock, kondisi yang terjadi pada sistem memenuhi **empat syarat utama terjadinya deadlock**, yaitu:
 1. Mutual Exclusion (Saling Eksklusif) 
    Setiap proses hanya dapat menggunakan sumber daya tertentu secara eksklusif. Dalam kasus ini, sumber daya yang sedang digunakan oleh suatu proses tidak dapat digunakan oleh proses lain secara bersamaan.
