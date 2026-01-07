@@ -1,13 +1,13 @@
 
-# Laporan Praktikum Minggu [X]
+# Laporan Praktikum Minggu [14]
 Topik: [Tuliskan judul topik, misalnya "Arsitektur Sistem Operasi dan Kernel"]
 
 ---
 
 ## Identitas
-- **Nama**  : [Nama Mahasiswa]  
-- **NIM**   : [NIM Mahasiswa]  
-- **Kelas** : [Kelas]
+- **Nama**  : Bachtiar Dwi Indrianto  
+- **NIM**   : 250320581 
+- **Kelas** : 1DSRA
 
 ---
 
@@ -60,7 +60,7 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 ---
 
 ## Quiz
-1. [Pertanyaan 1]  
+1. Mengapa container perlu dibatasi CPU dan memori? 
    **Jawaban:**  
 2. [Pertanyaan 2]  
    **Jawaban:**  
