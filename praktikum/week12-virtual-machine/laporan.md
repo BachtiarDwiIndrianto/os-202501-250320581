@@ -44,8 +44,26 @@ dmesg | head
 ---
 
 ## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+
+### **1.Instalasi Virtual Machine**
+<img width="980" height="691" alt="Screenshot 2026-01-08 234736" src="https://github.com/user-attachments/assets/d5e4b811-9490-463d-8580-39015c028689" />
+
+
+### **2.Proses konfigurasi virtual machine**
+<img width="979" height="689" alt="Screenshot 2026-01-08 223141" src="https://github.com/user-attachments/assets/0aa3047e-20fe-4b12-837e-3a0bcb51dcbe" />
+
+### **3.Instalasi Sistem Operasi OS Guest(UBUNTU)**
+<img width="980" height="691" alt="Screenshot 2026-01-08 225030" src="https://github.com/user-attachments/assets/f6b34e66-e4de-4185-8998-5e4b2035563b" />
+
+### **4.Instalasi Berhasil**
+<img width="1919" height="1079" alt="Screenshot 2026-01-08 224528" src="https://github.com/user-attachments/assets/d5b0446c-2f1d-48ee-a8f0-144dd395cbab" />
+
+### **5.Os Guest (CPU 1 CORE,RAM 2 GB,DISK SIZE 20 GB**
+<img width="1919" height="1079" alt="Screenshot 2026-01-08 231745" src="https://github.com/user-attachments/assets/2b620f88-7b5e-420d-8590-ed7e3d89d717" />
+
+### **6.Os Guest (CPU 2 CORE,RAM 4 GB,DISK SIZE 20 GB**
+<img width="1919" height="1079" alt="Screenshot 2026-01-08 220027" src="https://github.com/user-attachments/assets/2d22577a-0263-4114-9da2-809b2585c1bc" />
+
 
 ---
 
