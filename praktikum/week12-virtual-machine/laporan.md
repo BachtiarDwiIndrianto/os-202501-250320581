@@ -58,10 +58,10 @@ dmesg | head
 ### **4.Instalasi Berhasil**
 <img width="1919" height="1079" alt="Screenshot 2026-01-08 224528" src="https://github.com/user-attachments/assets/d5b0446c-2f1d-48ee-a8f0-144dd395cbab" />
 
-### **5.Os Guest (CPU 1 CORE,RAM 2 GB,DISK SIZE 20 GB**
+### **5.Os Guest (CPU 1 CORE,RAM 2 GB,DISK SIZE 20 GB)**
 <img width="1919" height="1079" alt="Screenshot 2026-01-08 231745" src="https://github.com/user-attachments/assets/2b620f88-7b5e-420d-8590-ed7e3d89d717" />
 
-### **6.Os Guest (CPU 2 CORE,RAM 4 GB,DISK SIZE 20 GB**
+### **6.Os Guest (CPU 2 CORE,RAM 4 GB,DISK SIZE 20 GB)**
 <img width="1919" height="1079" alt="Screenshot 2026-01-08 220027" src="https://github.com/user-attachments/assets/2d22577a-0263-4114-9da2-809b2585c1bc" />
 
 
