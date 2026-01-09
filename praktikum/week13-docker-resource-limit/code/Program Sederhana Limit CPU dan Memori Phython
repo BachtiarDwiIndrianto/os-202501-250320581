@@ -1,0 +1,19 @@
+```phyton
+import time
+
+data = []
+iterasi = 0
+
+print("Program uji CPU dan Memori dimulai...", flush=True)
+
+while True:
+    total = 0
+    for i in range(1_000_000):
+        total += i * i
+
+    data.append("X" * 10_000_000)
+    iterasi += 1
+
+    print(f"Iterasi ke-{iterasi} | Memori terpakai: {iterasi * 10} MB", flush=True)
+    time.sleep(1)
+```
