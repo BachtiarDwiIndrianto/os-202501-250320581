@@ -10,6 +10,14 @@ Topik: Docker – Resource Limit (CPU & Memori)
 - **Kelas** : 1DSRA
 
 ---
+## Deskripsi Singkat
+Pada praktikum minggu ini, mahasiswa mempelajari konsep **containerization** menggunakan Docker, serta bagaimana sistem operasi membatasi pemakaian sumber daya proses melalui mekanisme isolasi dan kontrol resource (mis. *cgroups* pada Linux).
+
+Fokus praktikum adalah:
+1. Membuat **Dockerfile sederhana** untuk menjalankan aplikasi/skrip.
+2. Menjalankan container dengan **pembatasan resource** (CPU dan memori).
+3. Mengamati dampak pembatasan resource melalui output program dan monitoring sederhana.
+---
 
 ## Tujuan
 Setelah menyelesaikan tugas ini, mahasiswa mampu:
@@ -21,43 +29,211 @@ Setelah menyelesaikan tugas ini, mahasiswa mampu:
 ---
 
 ## Dasar Teori
-Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
+Docker adalah platform untuk menjalankan aplikasi di dalam container yang bersifat ringan dan terisolasi dari sistem utama. Container memungkinkan aplikasi berjalan secara konsisten karena sudah dilengkapi dengan dependensi yang dibutuhkan. Docker menyediakan fitur pembatasan resource seperti CPU dan memori menggunakan parameter tertentu saat menjalankan container. Pembatasan CPU berpengaruh pada kecepatan eksekusi program, sedangkan pembatasan memori menentukan jumlah maksimum RAM yang dapat digunakan. Jika penggunaan memori melebihi batas yang ditentukan, container akan dihentikan otomatis oleh sistem. Monitoring penggunaan resource dapat dilakukan menggunakan perintah `docker stats` untuk melihat kinerja container secara real-time.
 
 ---
 
 ## Langkah Praktikum
-1. Langkah-langkah yang dilakukan.  
-2. Perintah yang dijalankan.  
-3. File dan kode yang dibuat.  
-4. Commit message yang digunakan.
+1. **Persiapan Lingkungan**
+
+   - Pastikan Docker terpasang dan berjalan.
+   - Verifikasi:
+     ```bash
+     docker version
+     docker ps
+     ```
+
+2. **Membuat Aplikasi/Skrip Uji**
+
+   Buat program sederhana di folder `code/` (bahasa bebas) yang:
+   - Melakukan komputasi berulang (untuk mengamati limit CPU), dan/atau
+   - Mengalokasikan memori bertahap (untuk mengamati limit memori).
+
+3. **Membuat Dockerfile**
+
+   - Tulis `Dockerfile` untuk menjalankan program uji.
+   - Build image:
+     ```bash
+     docker build -t week13-resource-limit .
+     ```
+
+4. **Menjalankan Container Tanpa Limit**
+
+   - Jalankan container normal:
+     ```bash
+     docker run --rm week13-resource-limit
+     ```
+   - Catat output/hasil pengamatan.
+
+5. **Menjalankan Container Dengan Limit Resource**
+
+   Jalankan container dengan batasan resource (contoh):
+   ```bash
+   docker run --rm --cpus="0.5" --memory="256m" week13-resource-limit
+   ```
+   Catat perubahan perilaku program (mis. lebih lambat, error saat memori tidak cukup, dll.).
+
+6. **Monitoring Sederhana**
+
+   - Jalankan container (tanpa `--rm` jika perlu) dan amati penggunaan resource:
+     ```bash
+     docker stats
+     ```
+   - Ambil screenshot output eksekusi dan/atau `docker stats`.
+
+7. **Commit & Push**
+
+   ```bash
+   git add .
+   git commit -m "Minggu 13 - Docker Resource Limit"
+   git push origin main
+   ```
+
 
 ---
 
 ## Kode / Perintah
-Tuliskan potongan kode atau perintah utama:
-```bash
-uname -a
-lsmod | head
-dmesg | head
+- PROGRAM SEDERHANA PHYTON
+```
+import time
+
+data = []
+iterasi = 0
+
+print("Program uji CPU dan Memori dimulai...", flush=True)
+
+while True:
+    total = 0
+    for i in range(1_000_000):
+        total += i * i
+
+    data.append("X" * 10_000_000)
+    iterasi += 1
+
+    print(f"Iterasi ke-{iterasi} | Memori terpakai: {iterasi * 10} MB", flush=True)
+    time.sleep(1)
+```
+- Isi Dockerfile
+```
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY code/ .
+
+CMD ["python", "test_resource.py"]
+```
+---
+
+
+## Analisis Dan Hasil Eksekusi
+### Persiapan Lingkungan
+<img width="1919" height="1079" alt="Screenshot 2026-01-10 001612" src="https://github.com/user-attachments/assets/da87df70-d2fe-4149-8c75-5de472ff5942" />
+
+
+```
+docker version
 ```
 
----
+Menampilkan docker version yang terpasang
 
-## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+```
+docker ps
+```
+Jika Docker berjalan normal, hasilnya:Tabel kosong (jika belum ada container aktif), atau Daftar container yang sedang berjalan
 
----
+### Membuat Aplikasi/Skrip Uji
+<img width="1919" height="1072" alt="Screenshot 2026-01-10 004154" src="https://github.com/user-attachments/assets/fc85b613-a294-4543-862c-55c974b24260" />
 
-## Analisis
-- Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
+- PROGRAM SEDERHANA PHYTON
+```
+import time
 
+data = []
+iterasi = 0
+
+print("Program uji CPU dan Memori dimulai...", flush=True)
+
+while True:
+    total = 0
+    for i in range(1_000_000):
+        total += i * i
+
+    data.append("X" * 10_000_000)
+    iterasi += 1
+
+    print(f"Iterasi ke-{iterasi} | Memori terpakai: {iterasi * 10} MB", flush=True)
+    time.sleep(1)
+
+```
+### Membuat Dockerfile
+<img width="1919" height="988" alt="Screenshot 2026-01-10 005745" src="https://github.com/user-attachments/assets/cd440fe2-b373-48d0-9375-b9ca4daa0dd0" />
+
+
+- Isi Dockerfile
+```
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY code/ .
+
+CMD ["python", "test_resource.py"]
+
+```
+FROM python:3.12-slim
+
+- Image dasar Python ringan
+
+WORKDIR /app
+
+- Direktori kerja di dalam container COPY code/ .
+
+- Menyalin program uji dari host ke container
+
+CMD ["python", "test_resource.py"]
+
+-  Menjalankan program uji saat container dijalankan
+
+### Menjalankan Container Dengan Limit Resource
+
+```
+docker run --rm --cpus="0.5" --memory="256m" week13-resource-limit
+```
+<img width="918" height="919" alt="Screenshot 2026-01-10 011644" src="https://github.com/user-attachments/assets/6d7ee084-dda0-4b93-8327-232afb09856c" />
+
+
+- Container boleh melewati limit sebentar
+- Kernel Linux memonitor RSS (real memory)
+- Saat benar-benar kehabisan memori, barulah:
+  - Kernel menjalankan OOM Killer
+  - Container dihentikan
+
+- Jadi wajar jika:
+  - Output masih muncul sampai “520 MB”
+  - Tapi docker stats tetap menunjukkan mendekati 256 MB
+  - Container mati sedikit terlambat
+ 
+- Nilai memori yang ditampilkan oleh program merupakan estimasi berdasarkan jumlah iterasi, bukan penggunaan memori aktual. Walaupun output program menunjukkan penggunaan memori melebihi 256 MB, Docker tetap membatasi penggunaan memori container. Container dihentikan secara otomatis oleh sistem (OOMKilled) ketika penggunaan memori aktual mencapai batas yang ditentukan.
+
+### Monitoring Sederhana
+<img width="1919" height="1079" alt="Screenshot 2026-01-10 014836" src="https://github.com/user-attachments/assets/ebe6b845-4621-4a7b-a62d-3ed9197d9382" />
+
+- Parameter yang diamati:
+  - CPU % → Terlihat dibatasi, tidak pernah mencapai 100%
+  - MEM USAGE / LIMIT → Penggunaan memori meningkat bertahap hingga mendekati 256 MB
+  - MEM % → Persentase memori naik seiring iterasi program
+  - PIDS → Jumlah proses stabil (1 proses utama)
+
+- Perilaku yang terlihat:
+  - CPU usage relatif stabil dan terbatas akibat opsi --cpus="0.5"
+  - Memori terus bertambah sesuai alokasi program
+  - Saat mendekati batas memori, container berhenti secara otomatis
+  - Tidak ada error Python, container dihentikan oleh sistem (OOM)
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+Praktikum ini menunjukkan bahwa Docker mampu menjalankan aplikasi dalam container dengan pembatasan resource secara efektif. Pembatasan CPU mempengaruhi kecepatan eksekusi program, sedangkan pembatasan memori dapat menyebabkan container dihentikan otomatis ketika batas terlampaui. Monitoring dengan `docker stats` membantu memahami penggunaan resource dan perilaku container secara nyata.
 
 ---
 
@@ -120,8 +296,10 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
+- Apa bagian yang paling menantang minggu ini?  Bagian paling menantang dalam praktikum ini adalah mengatasi error saat pembuatan Dockerfile serta memahami perilaku container ketika dibatasi CPU dan memori, terutama saat container berhenti otomatis karena keterbatasan memori.
+
+- Bagaimana cara Anda mengatasinya?  Cara mengatasi tantangan tersebut adalah dengan memastikan penulisan Dockerfile dan struktur folder sudah benar, melakukan build ulang image setelah setiap perubahan, serta menggunakan perintah `docker stats` untuk memantau penggunaan CPU dan memori sehingga penyebab masalah dapat diidentifikasi dengan jelas.
+
 
 ---
 
