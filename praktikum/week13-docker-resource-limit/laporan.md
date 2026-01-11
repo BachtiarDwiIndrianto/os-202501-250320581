@@ -142,6 +142,10 @@ docker ps
 ```
 Jika Docker berjalan normal, hasilnya:Tabel kosong (jika belum ada container aktif), atau Daftar container yang sedang berjalan
 
+Images dalam aplikasi docker
+
+<img width="1919" height="1079" alt="Gambar dalam aplikasi docker" src="https://github.com/user-attachments/assets/3c54433f-2647-490d-aa8a-8bea8c7e25ce" />
+
 ### Membuat Aplikasi/Skrip Uji
 <img width="1919" height="1072" alt="Screenshot 2026-01-10 004154" src="https://github.com/user-attachments/assets/fc85b613-a294-4543-862c-55c974b24260" />
 
