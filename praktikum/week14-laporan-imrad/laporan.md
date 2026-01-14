@@ -11,68 +11,50 @@ Topik: [Tuliskan judul topik, misalnya "Arsitektur Sistem Operasi dan Kernel"]
 
 ---
 
-## Tujuan
-Tuliskan tujuan praktikum minggu ini.  
-Contoh:  
-> Mahasiswa mampu menjelaskan fungsi utama sistem operasi dan peran kernel serta system call.
+# Laporan Praktikum Minggu [X]
+Topik: Penyusunan Laporan Praktikum Format IMRAD
 
 ---
 
-## Dasar Teori
-Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
+## Identitas
+- **Nama**  : Bachtiar Dwi Indrianto  
+- **NIM**   : 250320581
+- **Kelas** : 1DSRA
 
 ---
 
-## Langkah Praktikum
-1. Langkah-langkah yang dilakukan.  
-2. Perintah yang dijalankan.  
-3. File dan kode yang dibuat.  
-4. Commit message yang digunakan.
+## JUDUL
+Analisis Algoritma Penjadwalan CPU (FCFS dan SJF)
 
 ---
+# 1.Pendahuluan
 
-## Kode / Perintah
-Tuliskan potongan kode atau perintah utama:
-```bash
-uname -a
-lsmod | head
-dmesg | head
-```
+## 1.1.Latar Belakang
 
----
+## 1.2.Rumusan Masalah
 
-## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+## 1.3.Tujuan Penulisan
 
 ---
-
-## Analisis
-- Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
-
----
-
-## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+# 2.Metode
+## 2.1.Lingkungan Uji
+## 2.2.Langkah Eksperimen
+## 2.3.Data Set
+## 2.4.Cara pengukuran
 
 ---
-
-## Quiz
-1. Mengapa container perlu dibatasi CPU dan memori? 
-   **Jawaban:**  
-2. [Pertanyaan 2]  
-   **Jawaban:**  
-3. [Pertanyaan 3]  
-   **Jawaban:**  
+# 3.Hasil
+## 3.1.Hasil Uji
+## 3.2.Ringkasan Temuan
 
 ---
+# 4.Pembahasan
+## 4.1.Interpretasi hasil
+## 4.2.Keterbatasan
+## 4.3.Perbandingan teori
 
-## Refleksi Diri
-Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
+---
+# 5.Kesimpulan
 
 ---
 
