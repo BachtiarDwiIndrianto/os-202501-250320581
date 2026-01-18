@@ -69,7 +69,121 @@ Dataset yang digunakan terdiri dari 4 proses dengan spesifikasi sebagai berikut:
 
 **Tabel 1.** Dataset proses untuk simulasi penjadwalan CPU
 
-## 2.4.Cara pengukuran
+## 2.4.Program dalam bentuk PHYTON
+### PROGRAM SIMULASI FCFS
+```
+# PROGRAM SIMULASI FCFS
+
+# Data proses (nama proses, waktu datang, dan burst time)
+proses = [
+    {"nama": "P1", "arrival": 0, "burst": 6},
+    {"nama": "P2", "arrival": 1, "burst": 8},
+    {"nama": "P3", "arrival": 2, "burst": 7},
+    {"nama": "P4", "arrival": 3, "burst": 3},
+]
+
+# Variabel untuk menyimpan waktu CPU saat ini
+waktu_sekarang = 0
+
+# Variabel untuk menghitung total waiting dan turnaround
+total_waiting = 0
+total_turnaround = 0
+
+# Menampilkan judul tabel
+print("FCFS (First Come First Served)")
+print("-" * 75)
+print(f"{'Proses':<8}{'Burst':<8}{'Arrival':<10}{'Start':<8}{'Waiting':<10}{'Turnaround':<12}{'Finish':<8}")
+print("-" * 75)
+
+# Proses perhitungan FCFS
+for p in proses:
+    # Start time ditentukan oleh waktu CPU atau arrival time
+    start = max(waktu_sekarang, p["arrival"])
+
+    # Waiting time = start time - arrival time
+    waiting = start - p["arrival"]
+
+    # Turnaround time = waiting time + burst time
+    turnaround = waiting + p["burst"]
+
+    # Finish time = start time + burst time
+    finish = start + p["burst"]
+
+    # Update waktu CPU
+    waktu_sekarang = finish
+
+    # Menjumlahkan total waiting dan turnaround
+    total_waiting += waiting
+    total_turnaround += turnaround
+
+    # Menampilkan hasil per proses
+    print(f"{p['nama']:<8}{p['burst']:<8}{p['arrival']:<10}{start:<8}{waiting:<10}{turnaround:<12}{finish:<8}")
+
+# Menghitung nilai rata-rata
+rata_waiting = total_waiting / len(proses)
+rata_turnaround = total_turnaround / len(proses)
+
+# Menampilkan rata-rata
+print("-" * 75)
+print(f"{'Rata-rata':<34}{rata_waiting:<10.2f}{rata_turnaround:<12.2f}")
+```
+### PROGRAM SIMULASI SJF
+``` phyton
+
+# PROGRAM SIMULASI SJF (Non-Preemptive)
+
+# Data proses
+proses = [
+    {"nama": "P1", "arrival": 0, "burst": 6},
+    {"nama": "P2", "arrival": 1, "burst": 8},
+    {"nama": "P3", "arrival": 2, "burst": 7},
+    {"nama": "P4", "arrival": 3, "burst": 3},
+]
+
+waktu_sekarang = 0
+total_waiting = 0
+total_turnaround = 0
+selesai = []
+
+print("SJF (Shortest Job First - Non Preemptive)")
+print("-" * 80)
+print(f"{'Proses':<8}{'Burst':<8}{'Arrival':<10}{'Start':<8}{'Waiting':<10}{'Turnaround':<12}{'Finish':<8}")
+print("-" * 80)
+
+while proses:
+    # Ambil proses yang sudah datang
+    tersedia = [p for p in proses if p["arrival"] <= waktu_sekarang]
+
+    # Jika belum ada proses yang datang
+    if not tersedia:
+        waktu_sekarang += 1
+        continue
+
+    # Pilih proses dengan burst time terkecil
+    proses_terpendek = min(tersedia, key=lambda x: x["burst"])
+    proses.remove(proses_terpendek)
+
+    start = waktu_sekarang
+    waiting = start - proses_terpendek["arrival"]
+    turnaround = waiting + proses_terpendek["burst"]
+    finish = start + proses_terpendek["burst"]
+
+    waktu_sekarang = finish
+    total_waiting += waiting
+    total_turnaround += turnaround
+
+    print(f"{proses_terpendek['nama']:<8}{proses_terpendek['burst']:<8}{proses_terpendek['arrival']:<10}"
+          f"{start:<8}{waiting:<10}{turnaround:<12}{finish:<8}")
+
+    selesai.append(proses_terpendek)
+
+rata_waiting = total_waiting / len(selesai)
+rata_turnaround = total_turnaround / len(selesai)
+
+print("-" * 80)
+print(f"{'Rata-rata':<36}{rata_waiting:<10.2f}{rata_turnaround:<12.2f}")
+```
+## 2.5.Cara pengukuran
 ### Parameter Pengukuran
 Untuk setiap algoritma, parameter yang diukur meliputi:
 1. **Start Time**: Waktu mulai eksekusi proses
@@ -105,6 +219,21 @@ Untuk setiap algoritma, parameter yang diukur meliputi:
 # 3.Hasil
 ## 3.1.Hasil Uji
 ## 3.2.Ringkasan Temuan
+
+Berdasarkan hasil simulasi yang telah dilakukan, berikut adalah temuan-temuan utama:
+
+Akurasi Program: Implementasi program Python untuk kedua algoritma menghasilkan output yang 100% sesuai dengan perhitungan manual, menunjukkan validitas kode yang telah dibuat.
+Keunggulan SJF dalam Efisiensi:
+
+SJF menghasilkan average waiting time 28.6% lebih rendah (6.25 vs 8.75)
+SJF menghasilkan average turnaround time 16.9% lebih rendah (12.25 vs 14.75)
+Pengurangan 2.5 satuan waktu pada kedua metrik menunjukkan optimalisasi yang signifikan
+
+
+Pola Urutan Eksekusi:
+
+FCFS: P1 → P2 → P3 → P4 (mengikuti arrival time)
+SJF: P1 → P4 → P3 → P2 (memprioritaskan burst time terpendek)
 
 ---
 # 4.Pembahasan
