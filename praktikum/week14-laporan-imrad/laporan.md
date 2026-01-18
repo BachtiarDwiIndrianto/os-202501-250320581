@@ -55,6 +55,36 @@ Penelitian ini bertujuan untuk:
   - Phyton
 
 ## 2.2.Langkah Eksperimen
+1. **Menyiapkan Dataset**
+
+| Proses | Arrival Time | Burst Time |
+|:------:|:------------:|:----------:|
+| P1     | 0            | 6          |
+| P2     | 1            | 8          |
+| P3     | 2            | 7          |
+| P4     | 3            | 3          |
+
+2. **Persiapan Lingkungan**
+   - Alat Pendukungnya : `Visual Studio Code`
+   - Bahasa Pemrograman : `Python`
+   - Perhitungan Manual : `Microsoft Excel`
+
+3. **Implementasi FCFS**
+4. 
+   - Menghitung waiting time dan turnaround time.
+   - Menghitung rata rata.
+   - Catat hasil waiting time,turnaround time,dan rata rata.
+
+5. **Implementasi SJF**
+   
+   - Menghitung waiting time dan turnaround time.
+   - Menghitung rata rata.
+   - Catat hasil waiting time,turnaround time,dan rata rata.
+
+4. **Eksekusi & Validasi**
+
+   - Jalankan program untuk FCFS dan SJF.
+
 
 ## 2.3.Data Set
 
@@ -218,6 +248,52 @@ Untuk setiap algoritma, parameter yang diukur meliputi:
 ---
 # 3.Hasil
 ## 3.1.Hasil Uji
+
+### Hasil Simulasi FCFS
+- PROSES MANUAL MENGGUNKAN MICROSOFT EXCEL FCFS
+  
+  <img width="779" height="311" alt="FCFS_PerhitunganManual_excel" src="https://github.com/user-attachments/assets/54b6af68-ee7c-4602-8958-103b7f9143af" />
+**Gambar 1.** Proses manual excel 
+- HASIL SIMULASI ALGORITMA FCFS
+
+| Proses | Burst | Arrival | Start | Waiting | Turnaround | Finish |
+|:------:|:-----:|:-------:|:-----:|:-------:|:----------:|:------:|
+| P1     | 6     | 0       | 0     | 0       | 6          | 6      |
+| P2     | 8     | 1       | 6     | 5       | 13         | 14     |
+| P3     | 7     | 2       | 14    | 12      | 19         | 21     |
+| P4     | 3     | 3       | 21    | 18      | 21         | 24     |
+| **Rata-rata** | - | - | - | **8.75** | **14.75** | - |
+
+**Tabel 2.** Hasil simulasi algoritma FCFS
+
+- OUTPUT HASIL PROGRAM SIMULASI FCFS
+  <img width="793" height="266" alt="FCFS_Tabel_HasilPogram" src="https://github.com/user-attachments/assets/bbdc7de2-1f74-455d-9af1-96af6e1ae9e0" />
+
+**Gambar 2.** Output program fcfs
+
+### Hasil Simulasi SJF
+- PROSES MANUAL MENGGUNAKAN MICROSOFT EXCEL SJF
+  <img width="778" height="268" alt="SJF_PerhitunganManual_Excel" src="https://github.com/user-attachments/assets/aa3715fd-05ad-42f8-8242-58411f9a287f" />
+
+**Gambar 3.** Proses manual excel sjf
+  
+- HASIL SIMULASI ALGORITMA SJF
+  
+| Proses | Burst | Arrival | Start | Waiting | Turnaround | Finish |
+|:------:|:-----:|:-------:|:-----:|:-------:|:----------:|:------:|
+| P1     | 6     | 0       | 0     | 0       | 6          | 6      |
+| P4     | 3     | 3       | 6     | 3       | 6          | 9      |
+| P3     | 7     | 2       | 9     | 7       | 14         | 16     |
+| P2     | 8     | 1       | 16    | 15      | 23         | 24     |
+| **Rata-rata** | - | - | - | **6.25** | **12.25** | - |
+
+**Tabel 3.** Hasil simulasi algoritma SJF
+
+- OUTPUT HASIL PROGRAM SIMULASI SJF
+  <img width="796" height="290" alt="SJF_Tabel_HasilPogram" src="https://github.com/user-attachments/assets/e4b15184-9454-4797-a70d-bd6f2a221423" />
+
+**Gambar 4.** Output program sjf
+
 ## 3.2.Ringkasan Temuan
 
 Berdasarkan hasil simulasi yang telah dilakukan, berikut adalah temuan-temuan utama:
