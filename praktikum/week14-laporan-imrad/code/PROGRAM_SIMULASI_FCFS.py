@@ -1,0 +1,56 @@
+``` phyton
+# PROGRAM SIMULASI FCFS
+
+# Data proses (nama proses, waktu datang, dan burst time)
+proses = [
+    {"nama": "P1", "arrival": 0, "burst": 6},
+    {"nama": "P2", "arrival": 1, "burst": 8},
+    {"nama": "P3", "arrival": 2, "burst": 7},
+    {"nama": "P4", "arrival": 3, "burst": 3},
+]
+
+# Variabel untuk menyimpan waktu CPU saat ini
+waktu_sekarang = 0
+
+# Variabel untuk menghitung total waiting dan turnaround
+total_waiting = 0
+total_turnaround = 0
+
+# Menampilkan judul tabel
+print("FCFS (First Come First Served)")
+print("-" * 75)
+print(f"{'Proses':<8}{'Burst':<8}{'Arrival':<10}{'Start':<8}{'Waiting':<10}{'Turnaround':<12}{'Finish':<8}")
+print("-" * 75)
+
+# Proses perhitungan FCFS
+for p in proses:
+    # Start time ditentukan oleh waktu CPU atau arrival time
+    start = max(waktu_sekarang, p["arrival"])
+
+    # Waiting time = start time - arrival time
+    waiting = start - p["arrival"]
+
+    # Turnaround time = waiting time + burst time
+    turnaround = waiting + p["burst"]
+
+    # Finish time = start time + burst time
+    finish = start + p["burst"]
+
+    # Update waktu CPU
+    waktu_sekarang = finish
+
+    # Menjumlahkan total waiting dan turnaround
+    total_waiting += waiting
+    total_turnaround += turnaround
+
+    # Menampilkan hasil per proses
+    print(f"{p['nama']:<8}{p['burst']:<8}{p['arrival']:<10}{start:<8}{waiting:<10}{turnaround:<12}{finish:<8}")
+
+# Menghitung nilai rata-rata
+rata_waiting = total_waiting / len(proses)
+rata_turnaround = total_turnaround / len(proses)
+
+# Menampilkan rata-rata
+print("-" * 75)
+print(f"{'Rata-rata':<34}{rata_waiting:<10.2f}{rata_turnaround:<12.2f}")
+```
