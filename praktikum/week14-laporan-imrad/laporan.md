@@ -51,7 +51,49 @@ FCFS merupakan algoritma paling sederhana yang menjalankan proses berdasarkan ur
 ## 2.2.Langkah Eksperimen
 
 ## 2.3.Data Set
+
+Dataset yang digunakan terdiri dari 4 proses dengan spesifikasi sebagai berikut:
+
+| Proses | Arrival Time | Burst Time |
+|:------:|:------------:|:----------:|
+| P1     | 0            | 6          |
+| P2     | 1            | 8          |
+| P3     | 2            | 7          |
+| P4     | 3            | 3          |
+
+**Tabel 1.** Dataset proses untuk simulasi penjadwalan CPU
+
 ## 2.4.Cara pengukuran
+### Parameter Pengukuran
+Untuk setiap algoritma, parameter yang diukur meliputi:
+1. **Start Time**: Waktu mulai eksekusi proses
+2. **Waiting Time**: Waktu proses menunggu di ready queue (Start Time - Arrival Time)
+3. **Turnaround Time**: Total waktu proses di sistem (Waiting Time + Burst Time)
+4. **Finish Time**: Waktu selesai eksekusi proses (Start Time + Burst Time)
+5. **Average Waiting Time**: Rata-rata waktu tunggu semua proses
+6. **Average Turnaround Time**: Rata-rata waktu penyelesaian semua proses
+
+### Prosedur Eksperimen
+
+#### Algoritma FCFS
+1. Inisialisasi variabel `waktu_sekarang = 0`
+2. Urutkan proses berdasarkan arrival time (sudah terurut dalam dataset)
+3. Untuk setiap proses:
+   - Tentukan start time: `max(waktu_sekarang, arrival_time)`
+   - Hitung waiting time: `start_time - arrival_time`
+   - Hitung turnaround time: `waiting_time + burst_time`
+   - Update waktu CPU: `waktu_sekarang = start_time + burst_time`
+4. Hitung rata-rata waiting time dan turnaround time
+
+#### Algoritma SJF (Non-Preemptive)
+1. Inisialisasi variabel `waktu_sekarang = 0`
+2. Selama masih ada proses yang belum selesai:
+   - Filter proses yang sudah datang: `arrival_time ≤ waktu_sekarang`
+   - Jika tidak ada proses tersedia, increment waktu CPU
+   - Pilih proses dengan burst time terkecil dari proses tersedia
+   - Hitung parameter (start, waiting, turnaround, finish)
+   - Update waktu CPU dan hapus proses dari daftar
+3. Hitung rata-rata waiting time dan turnaround time
 
 ---
 # 3.Hasil
@@ -62,10 +104,27 @@ FCFS merupakan algoritma paling sederhana yang menjalankan proses berdasarkan ur
 # 4.Pembahasan
 ## 4.1.Interpretasi hasil
 ## 4.2.Keterbatasan
+
+1. **Dataset Terbatas**: Simulasi hanya menggunakan 4 proses. Dataset lebih besar diperlukan untuk analisis statistik yang lebih robust
+2. **Asumsi Ideal**: Simulasi mengasumsikan tidak ada context switch overhead, I/O blocking, atau interrupt
+3. **Burst Time Deterministik**: Dalam sistem nyata, burst time sulit diprediksi dengan akurat
+4. **Non-Preemptive**: Implementasi SJF yang digunakan adalah versi non-preemptive; versi preemptive (SRTF) mungkin memberikan hasil berbeda
+
 ## 4.3.Perbandingan teori
 
 ---
 # 5.Kesimpulan
+
+Berdasarkan hasil simulasi dan analisis yang telah dilakukan, dapat disimpulkan bahwa:
+
+1. **Validasi Implementasi**: Program simulasi yang dikembangkan menggunakan Python terbukti akurat dengan hasil identik terhadap perhitungan manual, memvalidasi kebenaran implementasi algoritma FCFS dan SJF.
+
+2. **Perbandingan Kinerja**: Algoritma SJF menghasilkan kinerja yang superior dibandingkan FCFS dengan average waiting time 28.6% lebih rendah (6.25 vs 8.75) dan average turnaround time 16.9% lebih rendah (12.25 vs 14.75), membuktikan optimalisasi teoritis SJF dalam meminimalkan waktu tunggu.
+
+3. **Trade-off Implementasi**: FCFS menawarkan kesederhanaan implementasi (kompleksitas O(n)) dan fairness tanpa starvation, sedangkan SJF memerlukan kompleksitas lebih tinggi (O(n²)) dan pengetahuan burst time namun menghasilkan efisiensi optimal. Pemilihan algoritma harus disesuaikan dengan karakteristik sistem dan ketersediaan informasi proses.
+
+4. **Keterbatasan Praktis**: Kedua algoritma memiliki keterbatasan signifikan untuk sistem operasi modern: FCFS rentan convoy effect dan SJF menghadapi masalah prediksi burst time serta potensi starvation, sehingga sistem operasi kontemporer menggunakan algoritma hybrid yang lebih adaptif.
+
 
 ---
 
